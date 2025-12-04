@@ -62,3 +62,8 @@ $route['live_session/admin_list'] = 'live_session/admin_list';
 $route['live_session/student_list'] = 'live_session/student_list';
 $route['live_session/join/(:num)'] = 'live_session/join/$1';
 
+
+
+$route['quiz/add-question/(:num)'] = 'quiz/add_question/$1';
+$route['quiz/take-quiz/(:num)']   = 'quiz/take_quiz/$1';
+$route['quiz/submit-quiz/(:num)'] = 'quiz/submit_quiz/$1';

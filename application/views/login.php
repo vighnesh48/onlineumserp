@@ -68,12 +68,17 @@ define('SECRET_KEY',SECRET_KEY);
        
          <form action="<?=site_url('login')?>" id="signin-form_id" method="post">
             <span>Sign In to your account :<strong><span class="redtext"> <?php if($utype!=''){echo $utype; }else{echo "Staff";} //echo $login_user; ?>  Login </span></strong></span>
-            <?php if(@$this->session->flashdata('msg')){?>
-            <div class="has-error redtext"><span class="form-control-feedback redtext"><?=@$this->session->flashdata('msg')?></span></div>
-            <? }?>
-            <? if($msg!=''){?>
-            <div class="has-error redtext" style="text-align:center"><span class="form-control-feedback redtext"><?=$msg?></span></div>
-            <? }?>
+            <?php if(@$this->session->flashdata('msg')){ ?>
+    <div class="has-error redtext">
+        <span class="form-control-feedback redtext"><?=@$this->session->flashdata('msg')?></span>
+    </div>
+<?php } ?>
+
+<?php if($msg!=''){ ?>
+    <div class="has-error redtext" style="text-align:center">
+        <span class="form-control-feedback redtext"><?=$msg?></span>
+    </div>
+<?php } ?>
             <!-- Username -->
             <div class="mb-3 text-start" style="padding-top:10px">
                <!--<label class="form-label">Username</label>-->
@@ -87,10 +92,10 @@ define('SECRET_KEY',SECRET_KEY);
                <input type="hidden" name="role_id" value="<?php if($_REQUEST['role']!=''){ $val = $_REQUEST['role'];}elseif($roleid !=''){$val =$roleid;}else{$val='';} echo $val;?>">
             </div>
   
-            <div class="g-recaptcha" data-sitekey="<?php echo SITE_KEY; ?>"></div>
+           <!-- <div class="g-recaptcha" data-sitekey="<?php echo SITE_KEY; ?>"></div>
             <span class="text-danger" id="captcha-error"><?= $errors['g-recaptcha-response'] ?? '' ?></span>
-            <!-- CSRF Token -->
-            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" />
+            
+            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" />-->
             <!-- Login Button -->
             <div class="form-actions">
                <input type="submit" name="submit" value="SIGN IN" class="signin-btn btn btn-gradient w-100 mt-3 " >
