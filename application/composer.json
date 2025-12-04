@@ -1,0 +1,19 @@
+{
+    "name": "onlineerp/onlineerp",
+    "type": "project",
+    "description": "Dependent packages for projetc",
+    "authors": [
+        {
+            "name": "ERP Team",
+            "email": "erp.support@sandipuniversity.edu.in"
+        }
+    ],
+    "require": {
+        "aws/aws-sdk-php": "^3.276",
+        "picqer/php-barcode-generator": "^2.4",
+        "endroid/qr-code": "4.6.1",
+        "phpmailer/phpmailer": "^6.9",
+		"vlucas/phpdotenv": "^5.5",
+		"google/apiclient":"^2.13"
+    }
+}

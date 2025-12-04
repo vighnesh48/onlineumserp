@@ -1,0 +1,26 @@
+
+ALTER TABLE `sf_transport_vendor`
+Modify `campus` enum('NASHIK','SIJOUL') NOT NULL,
+ADD `taluka` varchar(50) NOT NULL,
+ADD `district` varchar(50) NOT NULL,
+ADD `state` varchar(50) NOT NULL
+
+
+
+ADD `campus` enum('NASHIK','SIJOUL') NOT NULL,
+ADD `is_active`	enum('Y', 'N') NOT NULL,
+ADD `created_by` varchar(10) NOT NULL,
+ADD  `created_on` datetime NOT NULL,
+ADD `modified_by` varchar(10) NOT NULL,
+ADD  `modified_on` datetime NOT NULL
+
+
+ 
+CREATE TABLE `sf_academic_year` (
+  `id` int(11) NOT NULL,
+  `academic_year` varchar(7) NOT NULL,
+  `status` enum('Y','N')
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+ALTER TABLE `sf_academic_year`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;

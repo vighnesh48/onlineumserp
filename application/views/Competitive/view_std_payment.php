@@ -1,0 +1,952 @@
+<script src="<?=base_url('assets/javascripts').'/bootstrap-datepicker.js'?> "></script>
+<link href="<?=site_url()?>assets/css/bootstrapValidator.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="<?=site_url()?>assets/css/bootstrapValidator.min.css" rel="stylesheet" type="text/css" />
+<script src="<?=site_url()?>assets/javascripts/bootstrapValidator.js" type="text/javascript"></script>
+<style>
+.panel-heading {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+</style>
+
+<script>
+$(document).ready(function()
+    {
+		$('#doc-sub-datepicker20')
+               .datepicker({
+                   autoclose: true,
+				   todayHighlight: true,
+                   format: 'yyyy/mm/dd'
+               })
+               .on('changeDate', function (e) {
+                   // Revalidate the date field
+                   $('#makePayment').bootstrapValidator('revalidateField', 'dd_date');
+               }); 
+		
+        $('#makePayment').bootstrapValidator
+        ({  
+            message: 'This value is not valid',
+            group: 'form-group',
+            feedbackIcons: 
+            {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: 
+            {
+			/*	payfile: 
+				{
+					validators: {
+						notEmpty: 
+                      {
+                       message: 'Please Upload a file'
+                      },
+                      required: 
+                      {
+                       message: 'Please Upload a file'
+                      },
+						file: {
+							extension: 'pdf',
+							type: 'application/pdf',
+							maxSize: 100*1024, // 100kb
+							message: 'The selected file is not valid, it should be (pdf) and 100kb at maximum.'
+						}
+					}
+				},*/
+				dd_bank:
+                {
+                    validators: 
+                    {
+						notEmpty: 
+                      {
+                       message: 'Please select dd bank'
+                      },
+                      required: 
+                      {
+                       message: 'Please select dd bank'
+                      }
+                     
+                    }
+                },
+                acyear:
+                {
+                    validators: 
+                    {
+						notEmpty: 
+                      {
+                       message: 'Please select Academic'
+                      },
+                      required: 
+                      {
+                       message: 'Please select Academic'
+                      }
+                     
+                    }
+                },
+				payment_type:
+                {
+                    validators: 
+                    {
+						notEmpty: 
+                      {
+                       message: 'Please select payment type'
+                      },
+                      required: 
+                      {
+                       message: 'Please select payment type'
+                      }
+                     
+                    }
+                },
+				/*clreceipt:
+                {
+                    validators: 
+                    {
+                      notEmpty: 
+                      {
+                       message: 'college receipt should not be empty'
+                      }
+                    }
+                },*/
+				dd_bank_branch:
+                {
+                    validators: 
+                    {
+                      notEmpty: 
+                      {
+                       message: 'dd bank branch should not be empty'
+                      }
+                    }
+                },
+				dd_no:
+                {
+                    validators: 
+                    {
+                      notEmpty: 
+                      {
+                       message: 'dd number should not be empty'
+                      }
+                    }
+                },
+				dd_date:
+                {
+                    validators: 
+                    {
+                      notEmpty: 
+                      {
+                       message: 'dd date should not be empty'
+                      }
+                    }
+                },
+                paidfee:
+                {
+                    validators: 
+                    {
+                      notEmpty: 
+                      {
+                       message: 'paidfee should not be empty'
+                      },
+                      regexp: 
+                      {
+                        regexp: /^[0-9/]+$/,
+                        message: 'paidfee should be numeric'
+                      }
+					  
+					}
+
+                }
+			}       
+        }) 
+    });
+
+
+function feevalidate()
+{
+    //alert("jugal");
+ //   return false;
+    
+        var base_url = 'http://localhost/Transport/';
+                   // alert(type);
+                   var clreceipt = $("#clreceipt").val();
+                 
+                      
+                    
+           
+                $.ajax({
+                    'url' : base_url + '/Ums_admission/validate_receipt',
+                    'type' : 'POST', //the way you want to send data to your URL
+                    'data' : {'clreceipt':clreceipt},
+                    'success' : function(data){ //probably this request will return anything, it'll be put in var "data"
+                    //    var container = $('#stddata'); //jquery selector (get element by id)
+                        if(data){
+                          alert(data);
+                          if(data.trim()!='')  
+                          {
+                             alert("Receipt Number Should be Unique"); 
+                              e.preventDefault();
+                             return false;
+                          }
+                          else
+                          {
+                              $('#makePayment').submit();
+                          }
+                          
+                        //  alert(data);
+                            //alert("Marks should be less than maximum marks");
+                            //$("#"+type).val('');
+                           // container.html(data);
+                            
+                        }
+                       
+                    }
+                });
+                
+                 e.preventDefault();
+        return false;
+    
+  //  alert("out");
+    
+  // return false;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+</script>
+<?php
+    $astrik='<sup class="redasterik" style="color:red">*</sup>';
+   //echo "jugal";
+   //echo $total_fees['fee_paid'];
+   //var_dump($total_fees);
+?>
+<div id="content-wrapper">
+    <ul class="breadcrumb breadcrumb-page">
+        <div class="breadcrumb-label text-light-gray">You are here: </div>
+        <li><a href="#">Masters</a></li>
+        <li class="active"><a href="<?=base_url($currentModule)?>">Competitive Exam</a></li>
+    </ul>
+    <div class="page-header">			
+        <div class="row">
+            <h1 class="col-xs-12 col-sm-4 text-center text-left-sm"><i class="fa fa-dashboard page-header-icon"></i>&nbsp;&nbsp;Make Payment</h1>
+        </div>
+
+        <div class="row ">
+            <div class="col-sm-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <span class="panel-title">Payment Details</span>
+						<span id="flash-messages" style="color:Green;padding-left:50px;">
+						 <?php if(!empty($this->session->flashdata('message1'))){ echo $this->session->flashdata('message1'); } ?></span>
+					<span id="flash-messages" style="color:red;padding-left:50px;">
+						 <?php if(!empty($this->session->flashdata('message2'))){ echo $this->session->flashdata('message2'); } ?></span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-info">   
+						<table class="table table-bordered">
+    					<tr>
+    					  <th width="17%">Reg No:</th><td width="33%"><?=$student_details['reg_no']?></td>
+    					  <th width="17%">Organisation:</th>
+						  <td width="33%"><?=$student_details['student_org']?></td>
+						</tr>
+						<tr>
+						  <th scope="col">Student Name:</th><td><?=$student_details['student_name']?></td>
+						  <th width="15%">Academic Year:</th><td><?= isset($student_details['academic_year']) ? $student_details['academic_year'] : '' ?></td>
+						</tr>
+						<tr>
+						  <th scope="col">Gender:</th><td><?=$student_details['gender']=='M'?'Male':'Female'?></td>
+						  <th width="15%">Mobile :</th><td><?=$student_details['student_mobileno'] ?></td>
+						</tr>
+						<tr>
+						  <th scope="col">Address:</th><td><?=$student_details['address']?> <?=$student_details['state']?>, <?=$student_details['district']?>, <?=$student_details['city']?> - <?=$student_details['pincode']?>.</td>
+						  <th width="15%">UPSC Exam:</th><td><?= $student_details['upsc_exam']=='Y'? 'Yes' : 'No' ?></td>
+						</tr>
+						<tr>
+    					  <th scope="col">Entrance Type:</th><td id="prgm_id"><?php
+						echo $student_details['entrance_type'];
+						 
+					 ?></td>
+    					  <th width="15%">Admission Date :</th><td><?=date('d/m/Y',strtotime($student_details['admission_date']))?></td>
+    					</tr>
+						<tr>
+    					  <th scope="col">Come Toknow:</th><td id="brdpoint"><?=$student_details['come_toknow']?></td>
+    					</tr>
+						</table>
+    				    <table class="table table-bordered" style="width:100%;max-width:100%;">
+    					<tr>
+    					  <th width="15%">Academic Year</th>
+    					  
+    					   <th scope="col">Applicable Fees </th>
+
+    					  <th scope="col">Amount Paid</th>
+    					  <th scope="col">Balance</th>
+    					 <!-- <th scope="col">Action</th>-->
+    					  <?php
+    					  if($canc_charges['canc_amount']>0)
+    					  {
+    					  ?>
+    					    <th scope="col">Chq Cancellation Charges</th>
+    					      <th scope="col">Total Outstanding</th>
+    					      <?php
+    					      }
+    					      ?>
+    					</tr>
+    					<?php 
+					if(!empty($stud_faci_details)){
+						foreach($stud_faci_details as $student_faci_details)
+						{
+						$applicable_fee = ((int)$student_faci_details['applicable_fees']);
+						
+						
+						//$bal = (int)$student_faci_details['applicable_fee'] - (int)$get_feedetails[0]['amount'];
+					  
+    					//$srNo1=1;
+    					
+						$actual =	isset($student_faci_details['applicable_fees']) ? $student_faci_details['applicable_fee'] : '';
+						//$paid =isset($totfeepaid[0]['tot_fee_paid']) ? $totfeepaid[0]['tot_fee_paid'] : '';
+						//$paid =$total_fees['fee_paid'];
+						//echo $paid;
+						$paid =$student_faci_details['paid_amt']==''?0:$student_faci_details['paid_amt'];
+						?>
+    					<tr>
+						    <td><?= isset($student_faci_details['academic_year']) ? $student_faci_details['academic_year'] : '' ?></td>
+    						
+							<td><?= isset($student_faci_details['applicable_fees']) ? $student_faci_details['applicable_fees'] : '' ?></td>
+							    						
+    						<td id="paid_amt1"><?=$paid?></td>
+    						<td id="remaining1_amt">
+    						<?=$bal = $applicable_fee - (int)$paid ?>
+    							
+    						</td>
+    						<!--<td>
+							<?php /* if($student_faci_details['academic_year']==$student_faci_details['academic_year'])
+							{
+								
+								?>
+							
+    						    <a class="marksat" id="editpayment" data-stud_id="<?= $student_faci_details['stud_id']; ?>" data-deposite="<?=$student_faci_details['applicable_fees']?>" data-toggle="modal" data-target="#walkinModal" style="cursor:pointer"><button class="btn btn-primary btn-xs">Edit</button></a>
+								
+							<?php
+							} */
+							
+							?>
+    						</td>-->
+    						 <?php
+    					  if($canc_charges['canc_amount']>0)
+    					  {
+    					  ?>
+    							<td><?php echo $can_amt = $canc_charges['canc_amount']; //$canc_charges[0]['canc_amount'] ?></td>
+    							<td><?php echo $can_amt + $pend; //$canc_charges[0]['canc_amount'] ?></td>
+    							<?php
+    					  }
+						}		  
+					}
+    			?>
+    					</tr>
+    						
+    				  </table>	
+					  </div>
+					  
+					  <div class="panel">
+					  <div class="panel-heading">
+                        <span class="panel-title">Fees paid Details</span>
+						</div>
+						<div class="panel-body">
+						
+					  
+						<?php 
+						$i=1;
+						if(!empty($installment)){
+							?>
+							<table class="table table-bordered" style="width:100%;max-width:100%;">
+    					<tr>
+    					  <th scope="col">Sr. No. </th>
+    					    <th scope="col">Academic Year</th>
+						  <th scope="col">Paid By</th>
+    					  <th scope="col">Chq/DD No</th>
+    					  <th scope="col">Rcpt No</th>
+						  <th scope="col">Bank</th>
+    					  <th scope="col">Branch</th>
+						  <th scope="col">Dated</th>
+						  <th scope="col">Amount</th>
+						  <th scope="col">Can Charges</th>
+						  <th scope="col">Status</th>
+    					<!--  <th scope="col">Balance</th>
+    					  
+						  <th scope="col">Scan Copy</th>-->
+						
+						   <th scope="col">Action</th>
+    					</tr>
+							<?php
+							
+							foreach($installment as $inst){
+								$fee_date = date('d/m/Y',strtotime($inst['fees_date'] ));
+						?>
+    					<tr>
+    					    <td><?=$i?></td>
+    					    <td><?=$inst['academic_year']?></td>
+							<td><?=$inst['fees_paid_type']?></td>
+    						<td><?= isset($inst['receipt_no']) ? $inst['receipt_no'] : '' ?></td>
+    						<td><?= $inst['college_receiptno']; ?></td>
+							<td style="width: 250px;">
+							<?
+							
+							foreach ($bank_details as $branch) 
+							{
+							  if($branch['bank_id']==$inst['bank_id'])
+							  {echo $branch['bank_name'];break;}
+							}
+							
+							?></td>
+    						<td><?= isset($inst['bank_city']) ? $inst['bank_city'] : '' ?></td>
+							<td><?= isset($fee_date) ? $fee_date : '' ?></td>
+    						<td><?=$inst['amount']?></td>
+    							<td><?=$inst['canc_charges']?></td>
+    						<td><?php if($inst['chq_cancelled']=='N'){echo "Accepted";}else{echo "Cancelled";}?></td>
+    	
+						<!--	<td><?=$inst['balance_fees']?></td>-->
+							
+    						
+						<!--	<td>
+							<?php 
+							if(!empty($inst['receipt_file'])){
+								?>
+								<a href="<?=base_url()?>uploads/student_challans/<?=$inst['receipt_file']?>" target="_blank">View</a>
+							<?php }else{
+								echo "No";
+							}?>
+							</td>-->
+	<td><!--<i class="fa fa-edit"></i>--><input type="button" value="Edit" name="<?=$inst['fees_id']?>" id="editp" onclick="valid('<?=$inst['fees_id']?>')" class="btn btn-primary btn-xs">&nbsp;
+	<?php
+//	if($i>1){
+	?>
+<!--	<i class="fa fa-eye"></i>-->
+	<input type="button" value="Del" name="<?=$inst['fees_id']?>" id="delete" onclick="delete_record('<?=$inst['fees_id']?>')" class="btn btn-primary btn-xs">
+	<?php
+					//		}
+	?>
+	</td>
+    					</tr>
+						<?php
+						$i++;
+						
+							}
+						}else{
+							echo "<tr><td colspan=8>No Data Found</td></tr>";
+						}
+						?>
+    						
+    				  </table>
+					<br/>
+						
+						<div class="row ">
+							
+						<div class="col-sm-12">
+						
+							<div class="col-sm-5"></div>
+							<div class="col-sm-3">
+								<input type="button" name="make Payment" id="pmnt" value="Make Payment" class="btn btn-primary" />
+							</div>
+						
+						
+                        </div>
+                    </div>
+                    
+                    
+                    </div>
+                    
+										  <!------------------------------------------------------------------------------------------------------------------------------>
+					  
+                            
+                            
+                            
+                            
+                            <div id="edit_fee">
+                                
+                                
+                                </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                         </div>
+						 
+						 
+						 <div class="panel" id="makepmnt" style="display:none">
+                            <div class="panel-heading">
+								<span class="panel-title">Make Payment</span>
+							</div>
+                                <div class="panel-body">
+								<form name="makePayment" id="makePayment" onsubmit="" method="POST" action="<?=base_url()?>Competitive_exam/pay_Installment" enctype="multipart/form-data">
+								<?php
+									$studId = $this->uri->segment(3);
+									//$instute = $this->uri->segment(5);
+									//$academic_y = $this->uri->segment(6);
+								?>
+								     <div class="form-group">
+                                    <label class="col-sm-3">Academic Year <?=$astrik?></label>
+                                    <div class="col-sm-3">
+									<select name="acyear" id="acyear" class="form-control col-sm-3" required>
+                                    <option value="">Select Academic Year</option>
+									   
+										<?php //echo "state".$state;exit();
+										if(!empty($academic_details)){
+											foreach($academic_details as $academic){
+												$arr=explode("-",$academic['academic_year']);
+												$ac_year=$arr[0];
+												if($ac_year==$this->uri->segment(6))//($academic['status']=='Y')
+												{
+												?>
+											  <option selected value="<?=$ac_year?>"><?=$academic['academic_year']?></option>  
+											<?php 
+												}else{
+												?>
+												<option value="<?=$ac_year?>"><?=$academic['academic_year']?></option> 
+												<?php
+												}
+												
+											}
+										}
+									  ?>
+								  </select>	
+									</div>
+									</div>
+                                    
+                                  <div class="form-group">
+                                    <label class="col-sm-3">Payment of Rs <?=$astrik?></label>
+                                    <div class="col-sm-3">
+                                      <input data-bv-field="paidfee" id="paidfee" name="paidfee" class="form-control numbersOnly" value="" placeholder="Paid Fee" type="text" required>
+									  <input type="hidden" name="no_of_installment" value="<?= isset($noofinst[0]['max_no_installment']) ? $noofinst[0]['max_no_installment'] : '' ?>">
+									 
+									  <input type="hidden" name="stud_id" value="<?=$studId?>">
+									  
+									  <input type="hidden" name="min_balance" value="<?= isset($minbalance[0]['min_balance']) ? $minbalance[0]['min_balance'] : '' ?>">
+                                    </div>
+                                    <label class="col-sm-3">Payment Type <?=$astrik?></label>
+                                    <div class="col-sm-3">
+                                    <select name="payment_type" id="payment_type" class="form-control" required onchange="display()">
+                                        <option value="">Select Payment Type</option>
+									<option value="CHQ">Cheque</option>
+									<option value="DD">DD</option>
+									<option value="CHLN">Chalan</option>
+									<option value="RECPT">Receipt</option>
+									<option value="PG">Payment Gateway</option>
+									<option value="ITF">Internal Transfer</option>
+									<option value="POS">POS</option>
+									
+									</select>
+									
+									
+                                    </div>
+                                  </div>
+								<div id="noncash">  
+                                  <div class="form-group">
+								  <input type="hidden" name="actfee" value="<?= isset($stud_faci_details[0]['applicable_fees']) ? $stud_faci_details[0]['applicable_fees'] : '' ?>">
+								   <label class="col-sm-3"> Cheque/DD No./Chalan No. <?=$astrik?></label>
+                                    <div class="col-sm-3">
+                                      <input type="text" name="dd_no" class="form-control" required value="<?= isset($fee[0]['dd_no']) ? $fee[0]['dd_no'] : '' ?>" placeholder="Cheque/DD No./Chalan No" required>
+                                    </div>
+									
+                                    <label class="col-sm-3">Dated <?=$astrik?></label>
+                                    <div class="col-sm-3">
+                                      <input type="text" class="form-control" id="doc-sub-datepicker20" name="dd_date" required value="<?= isset($fee[0]['dd_drawn_date']) ? $fee[0]['dd_drawn_date'] : '' ?>" placeholder="DD Date" required readonly="true"/>
+                                    </div>
+                                    
+                                    <div class="col-sm-6">
+                                      
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="col-sm-3">Bank name <?=$astrik?></label>
+                                    <div class="col-sm-3">
+                                     <!-- <input type="text" id="dd_bank" name="dd_bank" class="form-control" value="<?= isset($fee[0]['dd_drawn_bank_branch']) ? $fee[0]['dd_drawn_bank_branch'] : '' ?>" placeholder="Bank & Branch">-->
+
+									<select name="dd_bank" id="dd_bank" class="form-control" required>
+									  <option value="">Select DD Bank <?=$astrik?></option>
+									  <?php
+										foreach ($bank_details as $branch) {
+										  echo '<option value="' . $branch['bank_id'] . '" ' . $sel . '>' . $branch['bank_name'] . '</option>';
+										}
+										?>
+								   </select>
+
+                                    </div>
+                                    <label class="col-sm-3"> Branch Name. <?=$astrik?></label>
+                                    <div class="col-sm-3">
+                                      <input type="text" id="dd_bank_branch" name="dd_bank_branch" class="form-control" value="" placeholder="Branch Name" required>
+                                    </div>
+                                  </div>
+                                  
+                                  <div class="form-group">
+								   <label class="col-sm-3">Upload document </label>
+                                    <div class="col-sm-3"><input type="file" name="payfile"></div>
+                                     <label class="col-sm-3">College Receipt Number</label>
+                                    <div class="col-sm-3">
+                                          <input type="text" id="clreceipt" name="clreceipt" class="form-control" value="" placeholder="College Receipt Number" >
+                                    </div>
+                                  </div>
+                               </div>
+                                    <div class="form-group">
+                                        
+                                          <label class="col-sm-3">Next Payment Date</label>
+                                    <div class="col-sm-3">
+                                      <input type="text" class="form-control" id="doc-sub-datepicker41" name="npdate"  value="<?= isset($fee[0]['next_payment_date']) ? $fee[0]['next_payment_date'] : '' ?>" placeholder="Next Payment Date"  readonly="true"/>
+                                    </div>
+								       <label class="col-sm-3">Remark</label>
+                                    <div class="col-sm-3">
+                                    <textarea class="form-control" id="remark" name="remark"></textarea>
+                                    </div>
+                                    </div>
+								  <div class="form-group">
+								      
+								      
+								   <label class="col-sm-4"></label> 
+                                    <div class="col-sm-2"><button type="submit" name="Make_Payment" value="Make Payment" class="btn btn-primary">Make Payment</button>
+                                    </div>
+									<div class="col-sm-2">
+									<button type="button" name="MP_cancel" id="MP_cancel" value="Cancel" class="btn btn-primary">Cancel</button>
+									</div>
+                                  </div>
+                                  </form>
+                                </div>
+                            </div>
+						 <!------------------------------------------------------------------------------------------------------------------------------------------------->
+
+                </div>
+            </div>    
+        </div>
+    </div>
+    
+        <!-- Modal -->
+<div class="modal fade" id="walkinModal" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                
+                <h4 class="modal-title" id="myModalLabel">
+                   <span id="fform_id">Edit Fees</span>
+                </h4>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <div class="row">
+                            <div class="col-sm-12">
+                                <div class="panel panel-default panel-hovered panel-stacked" style="margin-top: 10px;">
+                                    <div class="panel-body">
+                                        <form name="editfrm" method="POST" action="<?=base_url()?>Transport/updatePayment" enctype="multipart/form-data" onsubmit="return validate()">
+										<input type="hidden" name="fstud_id" class="form-control" id="fstud_id" style="width:50%"/>
+										<input type="hidden" name="enrollment_no" value="<?=$student_details['enrollment_no']?>">
+										<input type="hidden" name="student_id" value="<?=$studId?>">
+										<input type="hidden" name="org" value="<?=$instute?>">
+										<input type="hidden" name="academic_y" value="<?=$academic_y?>">
+									
+										
+                                        <div class="form-group">
+                                            <label class="col-sm-3" for="exampleInputEmail1">Actual Fees </label>
+                                             <div class="col-sm-6"> 
+                                                <input type="text" name="fdeposite" id="fdeposite" class="form-control" readonly>
+                                            </div>
+                                        </div>  
+                                        <div class="form-group">
+                                            <label class="col-sm-3" for="exampleInputEmail1">Exempted fees </label>
+                                             <div class="col-sm-6"> 
+                                                <input type="text" name="exem" id="exem" class="form-control" onchange="show_exemfile()">
+                                            </div>
+                                        </div> 
+                                        <div id="exemdiv" style="display:none">	  
+                                            <div class="form-group">
+                                                <label class="col-sm-3" for="exampleInputEmail1">Document supporting Exemption in Fees</label>
+								                <div class="col-sm-6">
+									                <input type="file" name="exemfile" id="exemfile" onchange="return validate()"><span id="efspan"></span>
+									            </div> 
+									       </div>
+									    </div>     
+                                                                              
+                                          
+                                          <button type="submit" class="btn btn-primary" id="updatePayment1" >Submit</button>
+                                          <button type="button" class="btn btn-default"
+                                                data-dismiss="modal">
+                                                    Close
+                                        </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+            </div>
+            
+            <!-- Modal Footer 
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                            Close
+                </button>
+                <button type="button" class="btn btn-primary">
+                    Save changes
+                </button>
+            </div>-->
+        </div>
+    </div>
+</div>
+<!-- model end-->
+    
+</div>
+
+
+<script>
+
+var stdid='<?=$stud_faci_details[0]['student_id']?>';  
+var base_url = '<?php echo site_url(); ?>';
+
+function display()
+{
+	var paid_opt=$('#payment_type').val();
+	if(paid_opt=='CASH')
+	$('#noncash').hide();
+else
+	$('#noncash').show();
+}
+
+function delete_record(feeid) 
+{
+
+	if(confirm("Are you sure you want to delete this transaction ?") == true) {
+	   // txt = "You pressed OK!";
+		
+	} 
+	else
+	{
+		return false;
+	}
+
+
+	$.ajax({
+		'url' : base_url + '/Competitive_exam/delete_fees',
+		'type' : 'POST', //the way you want to send data to your URL
+		'data' : {'feeid' : feeid,stdid:stdid},
+		'success' : function(data){ 
+		 
+			alert("Competitive Exam Fees transaction deleted successfully");
+			  //  container.html(data);
+			  location.reload(); 
+					return false;
+		 
+		}
+	});
+}
+
+function valid(feeid)
+{
+	$('#pmnt').prop('disabled', true);
+	$('#makepmnt').hide();
+	
+	//alert("called"+stdid+orgz+enroll);
+	  $.ajax({
+			'url' : base_url + '/Competitive_exam/edit_fdetails',
+			'type' : 'POST', //the way you want to send data to your URL
+			'data' : {'feeid' :feeid,stdid:stdid},
+			'success' : function(data){ //probably this request will return anything, it'll be put in var "data"
+				var container = $('#edit_fee'); //jquery selector (get element by id)
+				if(data){
+					//alert(data);
+					//alert("Marks should be less than maximum marks");
+					//$("#"+type).val('');
+					container.html(data);
+				}
+			}
+		});
+}
+
+    $('#pmnt').on('click', function () {
+       // $("#makepmnt").hide();
+		$("#makepmnt").show();
+	});
+    // Num check logic
+  	$('.numbersOnly').keyup(function () {
+    if (this.value != this.value.replace(/[^0-9\.]/g, '')) {
+       this.value = this.value.replace(/[^0-9\.]/g, '');
+    } 
+  	});
+	$('#doc-sub-datepicker20').datepicker( {format: 'yyyy-mm-dd',autoclose: true});
+	$('#doc-sub-datepicker21').datepicker( {format: 'yyyy-mm-dd',autoclose: true});
+	$('#doc-sub-datepicker41').datepicker( {format: 'yyyy-mm-dd',autoclose: true});
+	$('#doc-sub-datepicker42').datepicker( {format: 'yyyy-mm-dd',autoclose: true});
+	
+
+$('#MP_cancel').on('click', function () {
+       // $("#makepmnt").hide();
+		$("#makepmnt").hide();
+	});
+	
+$(document).ready(function(){
+	var prgm_id='<?=$student_details['type_id']?>';
+	var ac_year='<?=$student_details['academic_year']?>';
+	var std_id='<?=$student_details['stud_id']?>';
+	var enroll='<?=$student_details['student_prn']?>';
+	var applicable_fee='<?=(int)$student_faci_details['applicable_fees']?>';
+	//alert(prgm_id);
+	/* $.ajax({
+				type: 'POST',
+				url: '<?= base_url() ?>Hostel/getcoursename_by_prgmid',
+				data: {prgm_id:prgm_id,academic_year:ac_year},
+				success: function (html) {
+					//alert(html);
+					$('#prgm_id').html(html);
+				}
+			}); */
+			
+	/* $.ajax({
+		
+				type: 'POST',
+				url: '<?= base_url() ?>Hostel/getamtpaid_by_stdid',
+				data: {std_id:std_id,academic_year:ac_year,enroll:enroll},
+				success: function (html) {
+					//alert(html);
+					if(html=="")html=0;
+					
+					$('#paid_amt').html(html);
+					html=applicable_fee-html;
+					$('#remaining_amt').html(html);
+				}
+			}); */	
+});
+/////////////////
+$(document).on("click", '#editpayment', function () {
+        var stud_id = $('#editpayment').attr("data-stud_id");
+        var excemption_fees = $('#editpayment').attr("data-excemption_fees");//data-deposite
+        var efile = $('#editpayment').attr("data-file");
+        var actual_fees = $('#editpayment').attr("data-deposite");
+        //alert(stud_id);alert(gym_fees);alert(pending_balance);
+        if(stud_id !=''){
+			document.getElementById("fstud_id").value = parseInt(stud_id);
+			document.getElementById("fdeposite").value = parseInt(actual_fees);
+		}
+        
+		if(excemption_fees !=''){
+			document.getElementById("exem").value = parseInt(excemption_fees);
+		
+			$("#exemdiv").show();
+			if(efile!=''){
+				var va ='<a href="<?=base_url()?>uploads/Competitive/exepmted_fees/'+efile+'" class="pull-right" target="_blank"><i class="fa fa-sticky-note-o" style="font-size:24px"></i></a>';
+			$("#efspan").html(va);
+			    
+			}
+		}
+		
+
+    });
+	$('#updatePayment').on('click', function () {	
+		var sf_id = $('#fstud_id').val();
+		var exem = $("#exem").val();
+		var formdata = new FormData();   
+		if($('#exemfile').prop('files').length > 0)
+    {
+        file =$('#exemfile').prop('files')[0];
+        formdata.append("music", file);
+    }
+		//var file_data = $("#exemfile").prop("files")[0]; 
+	//	 alert(file_data);
+		               
+          //  form_data.append('file', file_data);
+	//	alert(form_data);
+		console.log(formdata);
+		if(exem!='')
+		{
+	        var efil = $("#exemfile").val(); 
+			if(efil=='')
+			{
+			   alert("Please select exemption supporting document");
+			    return false;
+			}
+			else{
+	            var val = efil.toLowerCase();
+		        var regex = new RegExp("(.*?)\.(docx|doc|pdf)$");
+		        if(!(regex.test(val))) {
+		            alert('Please select correct file format for document !');
+		            return false;
+		        } 
+            }
+		}
+		else{
+			
+			if (sf_id) {
+				$.ajax({
+					type: 'POST',
+					url: '<?= base_url() ?>account/updatePayment',
+					data: {sf_id:sf_id,formdata},
+					success: function (html) {
+						alert('updated successfully');
+						//window.location.reload(true);
+					}
+				});
+			} else {
+				//$('#admission-course').html('<option value="">Select course first</option>');
+			}
+		}
+	}); 
+function show_exemfile()
+			{
+			   // alert("temp");
+			    	 var exem = $("#exem").val();
+			    	 //exemdiv
+			    	 if(exem=='')
+			    	 {
+			    	    $("#exemdiv").hide(); 
+			    	    $('#exemfile').prop('required',false);
+			    	 }
+			    	 else
+			    	 {
+			    	   $("#exemdiv").show();
+			    	   $('#exemfile').prop('required',true);
+			    	   validate();
+			    	 }
+			    	 
+			    
+			}
+			
+function validate(){
+    var efil = $("#exemfile").val(); 
+			if(efil !='')
+			{
+
+	            var val = efil.toLowerCase();
+		        var regex = new RegExp("(.*?)\.(jpg|png|pdf|bmp)$");
+		        if(!(regex.test(val))) {
+		            alert('Please select only jpg|png|pdf|bmp file format for exemption fees !');
+		            $("#exemfile").val("");
+		            return false;
+		        
+                }
+                // return false;
+			}else{
+		
+		return true;
+			}
+}			
+	</script>

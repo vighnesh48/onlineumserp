@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title of the document</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript"> 
+	//$(document).ready(function() {
+    document.addEventListener("keyup", function (e) {
+    var keyCode = e.keyCode ? e.keyCode : e.which;
+            if (keyCode == 44) {
+                stopPrntScr();
+            }
+        });
+function stopPrntScr() {
+alert();
+            var inpFld = document.createElement("input");
+            inpFld.setAttribute("value", ".");
+            inpFld.setAttribute("width", "0");
+            inpFld.style.height = "0px";
+            inpFld.style.width = "0px";
+            inpFld.style.border = "0px";
+            document.body.appendChild(inpFld);
+            inpFld.select();
+            document.execCommand("copy");
+            inpFld.remove(inpFld);
+        }
+       function AccessClipboardData() {
+            try {
+                window.clipboardData.setData('text', "Access   Restricted");
+            } catch (err) {
+            }
+        }
+        setInterval("AccessClipboardData()", 300);
+	</script>
+	<style type="text/css" media="print">
+    body { visibility: hidden; display: none }
+	@media print {
+  body {
+    display: none;
+  }
+}@media print {
+    html, body {
+       display: none !important;  /* hide whole page */
+    }
+}
+</style>
+  </head>
+  <body onContextMenu="return false;">
+    <h2>Copy and cut disabled</h2>
+    <p>I am a text and you cannot copy or cut me.</p>
+   
+  </body>
+</html>

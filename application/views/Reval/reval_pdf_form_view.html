@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+body{ font-family: "Times New Roman", Times, serif}
+p{margin:8px 0px;}
+.space td{height:50px;vertical-align:top;padding-top:10px;}
+.detail-table tr td{padding:5px;}
+.detail-table tr th{padding:8px 5px;}
+</style>
+</head>
+
+<body>
+<div style="align:center;border:5px double #000;padding:10px;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td colspan="2" align="center"><img width="200" height="53" src="logo-su.png"></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"></p><strong>OFFICE OF THE CONTROLLER OF EXAMINATIONS</strong> <br>
+  <strong>APPLICATION FORM- PHOTOCOPY / REVALUATION - <?=$exam[0]['exam_month']?> <?=$exam[0]['exam_year']?></strong></p></td>
+  </tr>
+  <tr>
+    <td colspan="2"><p>NAME OF  THE CANDIDATE<strong> :</strong> <?=strtoupper($emp[0]['last_name'].' '.$emp[0]['first_name'].' '.$emp[0]['middle_name']);?></p></td>
+  </tr>
+  <tr>
+    <td colspan="2"><p>PRN. No<strong> :</strong> <?=$emp[0]['enrollment_no']?></p></td>
+  </tr>
+  <tr>
+    <td><p>School of</p></td>
+    <td><p>Programme <strong>:</strong> <?=$emp[0]['school_code']?>-<?=$emp[0]['school_name']?></p></td>
+  </tr>
+  <tr>
+    <td><p>Branch <strong>:</strong></p> <?=$emp[0]['stream_name']?></td>
+    <td><p>Semester/Year <strong>:</strong></p></td>
+  </tr>
+  <tr>
+    <td height="19" colspan="2">Regulations: 2016/2017</td>
+  </tr>
+</table>
+<br /><br />
+<table width="100%" border="1" cellspacing="0" cellpadding="0" class="detail-table">
+  <tr>
+    <td colspan="6" align="center"><strong>Photocopy  of Answer Script   : Rs. 500/- for each  course</strong><br />
+      <strong>Revaluation  of Answer Script: Rs. 500/- for each course</strong></td>
+    </tr>
+  <tr>
+    <th>Semester</th>
+    <th>Course Code</th>
+    <th>Course Name</th>
+    <th>CIA Marks Obtained</th>
+    <th>Photocopy  Revaluation</th>
+    <th>Fees(In Rs.)</th>
+  </tr>
+  <?php
+	$i=1;
+	if(!empty($sublist)){
+		foreach($sublist as $sub){
+		?>
+  <tr>
+    <td><?=$sub['semester']?></td>
+    <td><?=$sub['subject_code']?></td>
+    <td><?=$sub['subject_name']?></td>
+    <td><?=$sub['cia_marks']?></td>
+	<td><?=$sub['exam_marks']?></td>
+	<td><?=$sub['final_grade']?></td>
+    <td>Y</td>
+    <td>500/-</td>
+  </tr>
+  <?php 
+	$i++;
+	}
+	}else{
+		echo "<tr><td colspan=8>No data found.</td></tr>";
+	}
+	?>
+  <tr>
+    <td colspan="6" align="center"><strong>Total Amount:</strong> <?php if(!empty($sublist[0]['photocopy_fees'])){ echo $sublist[0]['photocopy_fees'].'/-';}?></td>
+    </tr>
+  <tr>
+    <td colspan="6" align="center"><em>The above particulars are verified and found to be correct.</em></td>
+    </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td align="center" height="50" valign="top"><em>Forwarded</em></td>
+    <td colspan="2" align="center" height="50" valign="top"><em>Recommended & Forwarded</em></td>
+    <td colspan="2">&nbsp;</td>
+    </tr>
+  <tr>
+    <td align="center">Signature of the Candidate</td>
+    <td align="center">Name  &amp; Signature of the Faculty Advisor with date</td>
+    <td colspan="2" align="center">Signature  of the Head of the Department with Date</td>
+    <td colspan="2" align="center">Signature of the Dean</td>
+    </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="space">
+  <tr>
+<td>I am  depositing a sum of Rupees(in words)  </td>
+
+  </tr>
+  <tr>
+  <td align="center" style="padding-left:150px;">towards the above on </tr>
+  </tr>
+  <tr>
+  <td align="right">Accounts Dept. </tr>
+  </tr>
+</table>
+</div>
+
+<div style="align:center;border:5px double #000;padding:10px;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="center"><p><strong>For office use only</strong></p></td>
+  </tr>
+</table>
+
+
+<table width="100%" border="1" cellspacing="0" cellpadding="0" class="detail-table">
+  <tr>
+    <th>S. No</th>
+    <th>Particulars</th>
+    <th>Marks Obtained</th>
+    <th>Issued / Retotaled / Evaluated by</th>
+    <th>Marks After (b) </th>
+  </tr>
+  <tr>
+    <td align="center">1</td>
+    <td align="center">Photocopy</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">**</td>
+  </tr>
+  <tr>
+    <td align="center">2</td>
+    <td align="center">Revaluation</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+  </tr>
+    <tr>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+  </tr>
+  
+
+</table>
+<br /><br />
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="space">
+  <tr>
+    <td colspan="2"><p>Verified  by</p></td>
+    </tr>
+  <tr>
+    <td><p>DCOE / ACOE</p> </td>
+    <td><p align="center">COE</p></td>
+  </tr>
+</table>
+
+</div>
+</body>
+</html>

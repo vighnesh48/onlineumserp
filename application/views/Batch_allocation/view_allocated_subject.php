@@ -1,0 +1,81 @@
+
+<div id="content-wrapper">
+    <ul class="breadcrumb breadcrumb-page">
+        <div class="breadcrumb-label text-light-gray">You are here: </div>
+        <li><a href="#">Masters</a></li>
+        <li class="active"><a href="#">Subject Allocation</a></li>
+    </ul>
+    <div class="page-header">			
+        <div class="row">
+            <h1 class="col-xs-12 col-sm-4 text-center text-left-sm"><i class="fa fa-dashboard page-header-icon"></i>&nbsp;&nbsp;Subject Allocation</h1>
+            <div class="col-xs-12 col-sm-8">
+                <div class="row">                    
+                    <hr class="visible-xs no-grid-gutter-h">
+                </div>
+            </div>
+        </div>
+		  <div class="row ">
+			<form id="form" name="form" action="<?=base_url($currentModule.'/assign_subToStudent')?>" method="POST">    
+
+			<div class="col-sm-12">
+				<div class="panel">
+                    <div class="panel-heading">
+                            <span class="panel-title">Subject List</span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-info">  
+						<table class="table table-bordered">
+    					<tr>
+    					  <th width="25%">PRN No :</th><td><?=$emp[0]['enrollment_no']?></td>
+						</tr>
+						<tr>
+						  <th scope="col">Student Name :</th><td><?=$emp[0]['last_name']?> <?=$emp[0]['first_name']?> <?=$emp[0]['middle_name']?></td>
+						</tr>
+						<tr>
+    					  <th scope="col">Course Name :</th><td><?=$emp[0]['stream_name']?></td>
+    					</tr>
+						</table>
+							<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Sr.No</th>
+									<th>Subject Code</th>
+									<th>Subject Name</th>
+									<th>Semester</th>
+									<th>Remove</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+								$i=1;
+									if(!empty($sublist)){
+										foreach($sublist as $sub){
+								?>
+								<tr>
+									<td><?=$i;?></td>
+									<td><?=$sub['subject_code']?></td>
+									<td><?=$sub['subject_name']?></td>
+									<td><?=$sub['semester']?></td>
+									<td><a href="<?=base_url()?>Subject_allocation/removeSubject/<?=$sub['sub_applied_id']?>/<?=$sub['stud_id']?>" onclick="return confirm('Are you sure you want to Remove this Subject?');">Remove<i class="fa fa-trash" aria-hidden="true"></i></a></td>
+									
+								</tr>
+								<?php 
+									$i++;
+									}
+									}else{
+										echo "<tr><td colspan=4>No data found.</td></tr>";
+									}
+								?>
+								</tbody>
+							</table>
+							
+						</div>
+                    </div>
+                </div>
+			</div>
+			</form>
+		</div>
+			
+    </div>
+</div>

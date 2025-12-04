@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /application/
+Disallow: /uploads/
+# Prevents all search engines from accessing the blocked directories

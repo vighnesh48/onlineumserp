@@ -1,0 +1,40 @@
+database changes:
+
+  add present_status column which could be of IN,HOME,CITY in sf_student_facility_allocation table.
+  add campus_name column which could be of NASHIK,SIJOUL in sf_student_master table.
+  
+code changes:
+
+   add present_status column in query which is written in fetch_alloted_details() of hostelmodel.
+   
+then copy all the code written after cancel_faci_submit() in hotel controller as well as in hostelmodel.
+
+add get_all_sf_students() in both hostel and hostelmodel 
+
+replace following fumctions in hostel controller:
+
+view_student(),add_student,add_student_submit(),edit_student,edit_student_submit() 
+
+replace the following view files:
+view_student.php,add_student.php,edit_student.php
+
+replace search_students_data() in hostelmodel
+
+replace view files like hostel_student_list.php and hostel_applied_list.php
+
+ 
+===========================================
+
+http://192.168.1.151/erp/Hostel/empty_beds
+
+http://192.168.1.151/erp/Fees_master
+
+http://192.168.1.151/erp/Hostel/view_student
+
+http://192.168.1.151/erp/Hostel/gatepass_list
+
+http://192.168.1.151/erp/Hostel/hostel_allocation_view?id=1
+
+http://192.168.1.151/erp/Hostel/student_list
+
+http://192.168.1.151/erp/Hostel/student_facility_details/170101051035/180/SU/2017
