@@ -93,7 +93,7 @@ class Login_model extends CI_Model
         if($isValidPassword){
             $conRes = $getCon->result_array();
 			//echo $getCon->last_query();
-            echo "print";
+            //echo "print";
             //var_dump($conRes);die();
             $dat['username']=$user;
             //  $dat['role_id']=$conRes[0]['roles_id'];

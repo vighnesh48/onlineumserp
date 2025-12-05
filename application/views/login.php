@@ -1,4 +1,4 @@
-<?php
+<?php 
    defined('BASEPATH') OR exit('No direct script access allowed');
    ?><!DOCTYPE html>
 <!DOCTYPE html>
@@ -67,6 +67,7 @@ define('SECRET_KEY',SECRET_KEY);
          </a>
        
          <form action="<?=site_url('login')?>" id="signin-form_id" method="post">
+
             <span>Sign In to your account :<strong><span class="redtext"> <input type="radio" name="uttype" value="Staff" required> Faculty  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="uttype" value="Student" required> Student </span></strong></span>
             <?php if(@$this->session->flashdata('msg')){?>
             <div class="has-error redtext"><span class="form-control-feedback redtext"><?=@$this->session->flashdata('msg')?></span></div>
@@ -74,6 +75,20 @@ define('SECRET_KEY',SECRET_KEY);
             <? if($msg!=''){?>
             <div class="has-error redtext" style="text-align:center"><span class="form-control-feedback redtext"><?=$msg?></span></div>
             <? }?>
+
+            <span>Sign In to your account :<strong><span class="redtext"> <?php if($utype!=''){echo $utype; }else{echo "Staff";} //echo $login_user; ?>  Login </span></strong></span>
+            <?php if(@$this->session->flashdata('msg')){ ?>
+    <div class="has-error redtext">
+        <span class="form-control-feedback redtext"><?=@$this->session->flashdata('msg')?></span>
+    </div>
+<?php } ?>
+
+<?php if($msg!=''){ ?>
+    <div class="has-error redtext" style="text-align:center">
+        <span class="form-control-feedback redtext"><?=$msg?></span>
+    </div>
+<?php } ?>
+
             <!-- Username -->
             <div class="mb-3 text-start" style="padding-top:10px">
                <!--<label class="form-label">Username</label>-->
@@ -89,7 +104,7 @@ define('SECRET_KEY',SECRET_KEY);
   
             <div class="g-recaptcha" data-sitekey="<?php echo SITE_KEY; ?>"></div>
             <span class="text-danger" id="captcha-error"><?= $errors['g-recaptcha-response'] ?? '' ?></span>
-            <!-- CSRF Token -->
+            
             <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" />
             <!-- Login Button -->
             <div class="form-actions">

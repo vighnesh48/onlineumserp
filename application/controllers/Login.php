@@ -39,17 +39,19 @@ class Login extends CI_Controller
 			//print_r($_POST);
 		//exit(0);
 			 //print_r($this->input->post());die;
-             $recaptchaResponse = $this->input->post('g-recaptcha-response');						
+            /* $recaptchaResponse = $this->input->post('g-recaptcha-response');						
 			if (!$recaptchaResponse) {
 				//$this->session->set_flashdata('message_event_error', 'Please verify that you are not a robot.');
-				$data['msg'] = 'Please verify that you are not a robot.';
+				//$data['msg'] = 'Please verify that you are not a robot.';
 				//echo 13;exit;
-			}else{		
-			$secretKey = SECRET_KEY; 
-			$verifyUrl = "https://www.google.com/recaptcha/api/siteverify";
+			}else
+			*/
+			{		
+			//$secretKey = SECRET_KEY; 
+			//$verifyUrl = "https://www.google.com/recaptcha/api/siteverify";
 
-			$response = file_get_contents($verifyUrl . "?secret={$secretKey}&response={$recaptchaResponse}");
-			$responseData = json_decode($response);	
+			//$response = file_get_contents($verifyUrl . "?secret={$secretKey}&response={$recaptchaResponse}");
+			//$responseData = json_decode($response);	
 			//
 			//if ($responseData->success) 
 			if(1==1)
@@ -62,6 +64,9 @@ class Login extends CI_Controller
 				$role_id = $this->security->xss_clean($this->input->post('role_id'));
 				$uttype = $this->security->xss_clean($this->input->post('uttype'));
 				$adminRec = array_shift($this->login_model->get_user($user,$pass,$role_id,$uttype));
+				
+				
+				
 				$get_student =$this->login_model->get_student($user);
 				if($user=='sunerp'){
 				//echo 1111;print_r($adminRec);

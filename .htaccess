@@ -1,59 +1,15 @@
 <IfModule mod_rewrite.c>
-  RewriteEngine On
-  Header always unset X-Powered-By
-  Header unset X-Powered-By
-  RewriteBase /
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^(.*)$ index.php?/$1 [L]
-  RewriteRule ^(.*)/$ /$1 [R=301,L]
-  RewriteRule ^(.*)/+$ $1 [R=301,L]
-  RewriteRule "^(.*/)?\.git/" - [F,L]
-  #RewriteCond %{QUERY_STRING} (\b(select|union|insert|update|delete|SHOW DATABASES|drop|--|;)\\b) [NC]
-  #RewriteRule ^.*$ - [F,L]
+    RewriteEngine On
+
+    # Correct base URL for your project
+    RewriteBase /onlineerp/onlineumserp/
+
+    Header always unset X-Powered-By
+    Header unset X-Powered-By
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
 </IfModule>
 
-<IfModule !mod_rewrite.c>
-  ErrorDocument 404 /index.php
-</IfModule>
 php_value max_input_vars 100000
-php_value suhosin.get.max_vars 100000
-php_value suhosin.post.max_vars 500000
-php_value suhosin.request.max_vars 100000
-Options -Indexes
-
-#Securing Sites from attacks #Amit Halder
-####
-Header add X-Frame-Options "SAMEORIGIN"
-Header add X-Xss-Protection "1; mode=block"
-Header add Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-Header add X-Content-Type-Options "nosniff"
-Header add Referrer-Policy "strict-origin-when-cross-origin"
-Header add Permissions-Policy "accelerometer=(self), camera=(self), geolocation=(self), gyroscope=(self), magnetometer=(self), microphone=(self), payment=(self), usb=(self)"
-Header add X-Permitted-Cross-Domain-Policies "none"
-Header add Expect-CT "max-age=86400, enforce"
-Header add Content-Security-Policy "block-all-mixed-content; frame-ancestors 'self';  object-src 'none'; base-uri 'self';"
-
-#Securing php #Amit Halder
-php_value expose_php  Off
-php_value display_errors Off
-
-
-<FilesMatch "\.(css|flv|gif|htm|html|ico|jpe|jpeg|jpg|js|mp3|mp4|png|pdf|swf|txt)$">
-    <IfModule mod_expires.c>
-        ExpiresActive Off
-    </IfModule>
-    <IfModule mod_headers.c>
-        FileETag None
-        Header unset ETag
-        Header unset Pragma
-        Header unset Cache-Control
-        Header unset Last-Modified
-        Header set Pragma "no-cache"
-        Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
-        Header set Expires "Thu, 1 Jan 1970 00:00:00 GMT"
-    </IfModule>
-</FilesMatch>
-
-
-

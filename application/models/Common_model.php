@@ -77,6 +77,22 @@ class Common_model extends CI_Model
         $query = $this->db->query($sql);
         return $query->result_array();
     }
+	
+	 public function get_subjects()
+    {
+		 $DB = $this->load->database('umsdb', TRUE); 
+        return $DB->get_where('subject_master', ['is_active'=>'Y'])->result_array();
+    }
+
+    public function get_units_by_subject($subject_id)
+    {
+		
+		$DB = $this->load->database('umsdb', TRUE); 
+        return $DB->get_where('syllabus_topics', [
+            'subject_id' => $subject_id
+            
+        ])->result_array();
+    }
     
     
 }
