@@ -67,3 +67,5 @@ $route['live_session/join/(:num)'] = 'live_session/join/$1';
 $route['quiz/add-question/(:num)'] = 'quiz/add_question/$1';
 $route['quiz/take-quiz/(:num)']   = 'quiz/take_quiz/$1';
 $route['quiz/submit-quiz/(:num)'] = 'quiz/submit_quiz/$1';
+$route['quiz-master'] = 'QuizMaster/index';
+$route['quiz-master/get-units'] = 'QuizMaster/get_units';

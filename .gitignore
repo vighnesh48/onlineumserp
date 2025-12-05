@@ -20,4 +20,5 @@ application/controllers/Login.php
 application/models/Login_model.php
 application/views/login.php
 application/views/home.php
+application/views/header.php
 'application/models/Eventlecturemodel.php'
