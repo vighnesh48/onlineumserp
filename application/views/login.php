@@ -76,18 +76,7 @@ define('SECRET_KEY',SECRET_KEY);
             <div class="has-error redtext" style="text-align:center"><span class="form-control-feedback redtext"><?=$msg?></span></div>
             <? }?>
 
-            <span>Sign In to your account :<strong><span class="redtext"> <?php if($utype!=''){echo $utype; }else{echo "Staff";} //echo $login_user; ?>  Login </span></strong></span>
-            <?php if(@$this->session->flashdata('msg')){ ?>
-    <div class="has-error redtext">
-        <span class="form-control-feedback redtext"><?=@$this->session->flashdata('msg')?></span>
-    </div>
-<?php } ?>
-
-<?php if($msg!=''){ ?>
-    <div class="has-error redtext" style="text-align:center">
-        <span class="form-control-feedback redtext"><?=$msg?></span>
-    </div>
-<?php } ?>
+           
 
             <!-- Username -->
             <div class="mb-3 text-start" style="padding-top:10px">
