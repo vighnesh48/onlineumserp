@@ -73,6 +73,12 @@
 
 <div class="container-fluid" style="padding:40px 25px;margin-top:20px">
     <div class="ticket-container">
+<div class="row">
+        <div class="col-xs-12">
+            <div class="header-title label-bold">Continuous Assessment -ONRDP101-Research Methodology</div>
+			
+        </div>
+    </div>
 
 
     <div class="assessment-card">
@@ -103,7 +109,7 @@
                     <img src="https://cdn-icons-png.flaticon.com/512/845/845646.png" class="status-icon">
                     Passed
                 </span>
-               <a href="assignments_guidelines_view" style="text-decoration: none; color: inherit;">  <button class="btn-start">START</button></a>
+               <!--<a href="assignments_guidelines_view" style="text-decoration: none; color: inherit;">  <button class="btn-start">START</button></a>-->
             </div>
         </div>
 

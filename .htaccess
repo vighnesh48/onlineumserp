@@ -2,8 +2,7 @@
     RewriteEngine On
 
     # Correct base URL for your project
-    RewriteBase /onlineerp/onlineumserp/
-
+    RewriteBase /onlineerpdummy/
     Header always unset X-Powered-By
     Header unset X-Powered-By
 

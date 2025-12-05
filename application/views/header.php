@@ -372,7 +372,204 @@ if($this->session->userdata('role_id')=='6'){
 		<div id="main-menu-inner sidebar" >
 			<div class="menu-content top" id="menu-content-demo">
 			</div>
-		
+			<ul class="navigation">
+			<?php
+			if($this->session->userdata('role_id')==4) {
+			  $uId=$this->session->userdata('name');
+        
+                $DB1 = $this->load->database('umsdb', TRUE);
+                $sql = "
+                                SELECT vsd.course_id,vsd.course_duration,sm.current_year,sm.enrollment_no,sm.admission_school
+                                from student_master sm 
+                                left join admission_details ad on ad.enrollment_no = sm.enrollment_no 
+                                left join vw_stream_details vsd on vsd.stream_id = sm.admission_stream
+                                where  sm.academic_year = '2025' AND  sm.enrollment_no = '$uId' 
+                ";
+                $stud_det = $DB1->query($sql)->row_array();
+				// echo "<pre>";
+               //  print_r($stud_det);exit;
+
+               /* if($stud_det['course_duration'] == $stud_det['current_year']){ */
+			   
+			   
+				   if (
+						(!empty($stud_det) && $stud_det['admission_school'] == 6 && $stud_det['current_year'] == 3) ||
+						(!empty($stud_det) && $stud_det['course_duration'] == $stud_det['current_year'])
+					){
+                        $enroll = base64_encode($uId);
+                        // echo "<pre>";
+                        // print_r($enroll);exit;
+                
+                // print_r($enroll);exit;
+                $href = 'https://sg-connect.sandipuniversity.com/apply-student-Drive-Registration/'.$enroll;
+				
+				
+				
+			?>
+			<li class="mm-dropdown mm-dropdown-root open">
+                                <a href="<?=$href ?>" target="_blank"><i class="menu-icon fa fa fa-edit" target="_blank"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Apply for Career</span></a>                                        
+                                    
+                            </li>
+						
+							
+							<!--	<li class="mm-dropdown mm-dropdown-root open">
+                                <a target="_blank"><i class="menu-icon fa fa fa-edit"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Cution Money Comming Soon</span></a>                                        
+                                    
+                            </li> -->
+			
+				<?php  } 
+				$enrollment_no = $this->session->userdata('name');
+				$secret = "Sandip@123"; // must match Laravel secret
+				$token = hash('sha256', $enrollment_no . $secret);
+				$urlCaution = "https://facilities.sandipuniversity.com/sso/student-login/$enrollment_no/$token";
+				?> 
+				
+				<li class="mm-dropdown mm-dropdown-root open" style="display:none">
+                                <a href="<?php  echo $urlCaution ?>"><i class="menu-icon fa fa fa-edit" target="_blank"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Cution Money</span></a>                                        
+                                    
+                            </li> 
+				<? }
+				
+								
+								$uni_type=$this->session->userdata('uni_type'); 
+								$universalid=$this->session->userdata('universalid');
+								if($this->session->userdata('role_id')!=4){								
+								?>
+								
+						      <li class="dropdown"  style="display:none">
+								<a target="_blank" href="https://sandiperp.com/TicketMasterNew.aspx?UserTypeId=Mw==&EmpsId=<?=$universalid?>" class="dropdown-toggle user-menu" data-toggle="">
+                                <span class="fa fa-ticket" ></span> Create Ticket<span id='remid'><sup></sup></span>
+								</a>
+								</li>
+						<?php }?>
+		<?
+/*  echo"<pre>";
+ print_r($my_menu_details['level_1']);
+ echo"</pre>";
+die();  */ 		
+//echo $this->session->userdata('name');
+//echo $this->session->userdata('ro');
+                            for($i=0;$i<count($my_menu_details['level_0']);$i++)
+                            {
+								if($this->session->userdata('role_id')==3){ //if role of user Employee
+							//	if(!empty($this->session->userdata('ro')) && ($this->session->userdata('ro')=='on'))//if user is RO then display all menu
+							//	{							
+			?>            
+                            <li class="mm-dropdown">
+                                <a href="<?=base_url($my_menu_details['level_0'][$i]['path'])?>"><i class="menu-icon fa <?=$my_menu_details['level_0'][$i]['icon']?>"></i><span class="mm-text"><?=$my_menu_details['level_0'][$i]['menu_name']?></span></a>                                        
+                                    <ul>
+                                        <?php
+                                        $sub_menu=$my_menu_details['level_1'][$my_menu_details['level_0'][$i]['menu_id']];
+                                        for($j=0;$j<count($sub_menu);$j++)
+                                        {
+                                        ?>
+                                            <li>
+                                                <a href="<?=base_url($sub_menu[$j]['path'])?>"><i class="menu-icon <?=$sub_menu[$j]['icon']?>"></i><span class="mm-text"><?=$sub_menu[$j]['menu_name']?></span></a>                                        
+                                            </li>
+                                        <?php
+                                        }
+                                        ?>    
+                                    </ul>
+                            </li>
+			
+			<? }elseif($this->session->userdata('role_id')==1){//for admin
+			
+			if($my_menu_details['level_0'][$i]['menu_name']=="Dashboard"){?>
+								<li >
+                                <a href="<?=base_url($my_menu_details['level_0'][$i]['path'])?>"><i class="menu-icon fa <?=$my_menu_details['level_0'][$i]['icon']?>"></i><span class="mm-text"><?=$my_menu_details['level_0'][$i]['menu_name']?></span></a>                                        
+                                    <ul>
+                                        <?php
+                                        $sub_menu=$my_menu_details['level_1'][$my_menu_details['level_0'][$i]['menu_id']];
+                                        for($j=0;$j<count($sub_menu);$j++)
+                                        {
+                                        ?>
+                                            <li>
+                                                <a href="<?=base_url($sub_menu[$j]['path'])?>"><i class="menu-icon <?=$sub_menu[$j]['icon']?>"></i><span class="mm-text"><?=$sub_menu[$j]['menu_name']?></span></a>                                        
+                                            </li>
+                                        <?php
+                                        }
+                                        ?>    
+                                    </ul>
+                            </li>
+									
+							<?php	}else{?>
+							<li class="mm-dropdown">
+                                <a href="<?=base_url($my_menu_details['level_0'][$i]['path'])?>"><i class="menu-icon fa <?=$my_menu_details['level_0'][$i]['icon']?>"></i><span class="mm-text"><?=$my_menu_details['level_0'][$i]['menu_name']?></span></a>                                        
+                                    <ul>
+                                        <?php
+                                        $sub_menu=$my_menu_details['level_1'][$my_menu_details['level_0'][$i]['menu_id']];
+                                        for($j=0;$j<count($sub_menu);$j++)
+                                        {
+                                        ?>
+                                            <li>
+                                                <a href="<?=base_url($sub_menu[$j]['path'])?>"><i class="menu-icon <?=$sub_menu[$j]['icon']?>"></i><span class="mm-text"><?=$sub_menu[$j]['menu_name']?></span></a>                                        
+                                            </li>
+                                        <?php
+                                        }
+                                        ?>    
+                                    </ul>
+                            </li>								
+							<?php	}}else{ // else role other than employee?>
+							 	
+								<li class="mm-dropdown">
+                                <a href="<?=base_url($my_menu_details['level_0'][$i]['path'])?>"><i class="menu-icon fa <?=$my_menu_details['level_0'][$i]['icon']?>"></i><span class="mm-text"><?=$my_menu_details['level_0'][$i]['menu_name']?></span></a>                                        
+                                    <ul>
+                                        <?php
+                                        $sub_menu=$my_menu_details['level_1'][$my_menu_details['level_0'][$i]['menu_id']];
+                                        for($j=0;$j<count($sub_menu);$j++)
+                                        {
+                                        ?>
+                                            <li>
+                                                <a href="<?=base_url($sub_menu[$j]['path'])?>"><i class="menu-icon <?=$sub_menu[$j]['icon']?>"></i><span class="mm-text"><?=$sub_menu[$j]['menu_name']?></span></a>                                        
+                                            </li>
+                                        <?php
+                                        }
+                                        ?>    
+                                    </ul>
+                            </li>
+								
+							<?php }} 
+							
+							if($_SESSION['name']=="110081" || $_SESSION['name']=="110077" || $_SESSION['name']=="110156" || $_SESSION['name']=="110071" || $_SESSION['name']=="110129"
+							 || $_SESSION['name']=="110148" || $_SESSION['name']=="110048")
+							{
+							?>
+							
+					
+						   <li class="mm-dropdown mm-dropdown-root open">
+                                <a href="<?=base_url()?>conference"><i class="menu-icon fa fa fa-edit"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">ICEMELTS Conference</span></a>                                        
+                                    <ul class="mmc-dropdown-delay animated fadeInLeft" style="">
+                                            <li>
+                                                <a href="<?=base_url()?>conference"><i class="menu-icon fa fa-list"></i><span class="mm-text">Registration List</span></a>                                        
+                                            </li>
+                                            <li>
+                                                <a href="<?=base_url()?>conference/icemelt_registration_2018"><i class="menu-icon fa fa-list"></i><span class="mm-text">Payment List</span></a>                                        
+                                            </li>                                       
+                                    </ul>
+                            </li>	
+                            <?php
+                            }
+                            ?>
+                            <?php 
+							
+							if($_SESSION['name']=="210002")
+							{
+							?>
+							
+					
+						   <li class="mm-dropdown mm-dropdown-root open">
+                                <a href="<?=base_url()?>conference"><i class="menu-icon fa fa fa-edit"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Post Examination</span></a>                                        
+                                    <ul class="mmc-dropdown-delay animated fadeInLeft" style="">
+                                            <li>
+                                                <a href="<?=base_url()?>Reval/list_applied"><i class="menu-icon fa fa-list"></i><span class="mm-text">Photocopy/Revaluation List</span></a>                                        
+                                            </li>
+                                                                                 
+                                    </ul>
+                            </li>	
+                            <?php
+                            }
+                            ?>
+			</ul>    
 			
 		
 			

@@ -13,7 +13,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <!-- TinyMCE -->
-    <script src="https://cdn.tiny.cloud/1/q5qizpro8tuffbxgbred7gh5ezvha0nx2bra8wec4a9hmmwp/tinymce/6/tinymce.min.js"
+    <script src="https://cdn.tiny.cloud/1/et0ffqvi6jxn3hrt1b1j6npiyct1hxwpxywcjkxxgjedh99h/tinymce/6/tinymce.min.js"
             referrerpolicy="origin"></script>
 
 <style>

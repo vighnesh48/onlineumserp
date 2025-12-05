@@ -88,7 +88,8 @@ hr {
     <!-- Title Row -->
     <div class="row">
         <div class="col-xs-12">
-            <div class="header-title">Continuous Assessment</div>
+            <div class="header-title">Continuous Assessment -ONRDP101-Research Methodology</div>
+			
         </div>
     </div>
 
@@ -114,13 +115,13 @@ hr {
                     <div class="assessment-card">
                         <div class="card-title">
                             Assignment 1 
-                            <span class="label label-test">Test</span>
+                            
                         </div>
 
                         <br>
 
                         <div class="info-list">
-                            <div><strong>Start Date:</strong> Jul 01, 2025</div><hr/>
+                            <div><strong>Start Date:</strong> Dec 01, 2025</div><hr/>
                             <div><strong>End Date:</strong> Dec 10, 2025</div><hr/>
                             <div><strong>Duration:</strong> 15 Mins</div><hr/>
                             <div><strong>Total Marks:</strong> 15</div><hr/>
@@ -143,15 +144,15 @@ hr {
                     <div class="assessment-card">
                         <div class="card-title">
                             Assignment 2 
-                            <span class="label label-test">Test</span>
+                            
                         </div>
 
                         <br>
 
                         <div class="info-list">
-                            <div><strong>Start Date:</strong> Jul 01, 2025</div><hr/>
-                            <div><strong>End Date:</strong> Dec 10, 2025</div><hr/>
-                            <div><strong>Duration:</strong> 15 Mins</div><hr/>
+                            <div><strong>Start Date:</strong> Dec 05, 2025</div><hr/>
+                            <div><strong>End Date:</strong> Dec 15, 2025</div><hr/>
+                            <div><strong>Duration:</strong> 20 Mins</div><hr/>
                             <div><strong>Total Marks:</strong> 15</div><hr/>
                             <div><strong>Passing Marks:</strong> 6</div><hr/>
                         </div>

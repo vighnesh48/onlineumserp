@@ -128,7 +128,11 @@ class Login extends CI_Controller
 							redirect('Leave/leave_applicant_list');
 						}elseif($adminRec['username']=='662659'){
 							redirect('finance/dashboard');  
-						}else{
+						}elseif($adminRec['roles_id']==4){
+							
+							redirect('Student_dashboard');
+						}
+						else{
 							redirect('home');
 						}
 						exit;
