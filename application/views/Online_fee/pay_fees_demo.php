@@ -97,7 +97,7 @@ $( document ).ready(function() {
 		  }else if(admission_cycle != ''){
 			  //alert(4);
 			  
-			   $("#PaymentType").html('<select name="Payment_type" id="Payment_type" class="form-control" onchange="onPayment_type()"><option value="">Select Payment Type</option><option value="4">58% Payment</option><option value="2">Full Payment</option></select>');
+			   $("#PaymentType").html('<select name="Payment_type" id="Payment_type" class="form-control" onchange="onPayment_type()"><option value="">Select Payment Type</option><option value="4">50% Payment</option><option value="2">Full Payment</option></select>');
 			  
 		  } 
 		  else{
@@ -107,7 +107,7 @@ $( document ).ready(function() {
 			  //alert(stud_id);
 				$("#PaymentType").html('<select name="Payment_type" id="Payment_type" class="form-control" onchange="onPayment_type()"><option value="">Select Payment Type</option><option value="33">Package</option></select>');
 			} else {
-			$("#PaymentType").html('<select name="Payment_type" id="Payment_type" class="form-control" onchange="onPayment_type()"><option value="">Select Payment Type</option><!--option value="1">50% Payment</option--><!--option value="4">58% Payment</option --><option value="1">50% Payment</option><option value="3">70% Payment</option><option value="2">Full Payment</option></select>');
+			$("#PaymentType").html('<select name="Payment_type" id="Payment_type" class="form-control" onchange="onPayment_type()"><option value="">Select Payment Type</option><!--option value="1">50% Payment</option--><!--option value="4">50% Payment</option --><option value="1">50% Payment</option><option value="3">70% Payment</option><option value="2">Full Payment</option></select>');
 		   } 
 		  }
 	  }else{
@@ -130,7 +130,7 @@ $( document ).ready(function() {
 	   if(admission_cycle != ''){
 			  //alert(4);
 			  
-			   $("#PaymentType").html('<select name="Payment_type" id="Payment_type" class="form-control" onchange="onPayment_type()"><option value="">Select Payment Type</option><option value="4">58% Payment</option><option value="2">Full Payment</option></select>');
+			   $("#PaymentType").html('<select name="Payment_type" id="Payment_type" class="form-control" onchange="onPayment_type()"><option value="">Select Payment Type</option><option value="4">50% Payment</option><option value="2">Full Payment</option></select>');
 			  
 		  } 
 		
@@ -416,7 +416,7 @@ $(".nextBtn ").prop('disabled', true);
             <div id="exTab1">
             <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">Admission / Examination</a></li>
-    <li><a data-toggle="tab" href="#menu1"> Transportation</a></li>
+    <!--li><a data-toggle="tab" href="#menu1"> Transportation</a></li>
     <?php //if($stdata['stud_id']=="3407"){ ?>
     <li><a data-toggle="tab" href="#menu2"> Hostel Gyms</a></li>
      <?php //if($stdata['stud_id']=="7972")
@@ -647,7 +647,7 @@ $(".nextBtn ").prop('disabled', true);
                           <div class="col-sm-1"></div>
                           <div class="col-sm-5"><h4><b>Instructions:</b></h4>
                           <ol style="font-family:verdana;line-height:24px;">
-                            <li>For <b>Re-registration</b> select Academic Year <b>2025-26</b> and fees type <b>Re-registration</b> then click on Pay now button.</li>
+                            <li>For <b>Admission</b> select Academic Year <b>2025-26</b> and fees type <b>Admission</b> then click on Pay now button.</li>
                             <li>Select Fees type and Enter the Payment amount.</li>
                             <li>After Clicking on the <b>Pay Now</b> button ,it will redirect to Payment Gateway page.</li>
                             <li>After payment successful completion you will receive SMS notification and Email with Payment Receipt.</li>

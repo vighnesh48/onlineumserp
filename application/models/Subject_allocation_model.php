@@ -105,9 +105,10 @@ class Subject_allocation_model extends CI_Model
         {
             $where.=" AND sm.semester='".$sem_id."'";
         }
-		$sql="SELECT sas.stud_id, sas.subject_id,sm.subject_name,sm.credits, sas.sub_applied_id,sm.subject_component,sm.subject_type, sm.subject_code,sm.semester,sm.batch,e.subject_id as res_subject_id FROM `student_applied_subject` as sas 
+		$sql="SELECT sas.stud_id, sas.subject_id,sm.subject_name,sm.credits, sas.sub_applied_id,sm.subject_component,sm.subject_type, sm.subject_code,sm.semester,sm.batch,'' as res_subject_id 
+		FROM `student_applied_subject` as sas 
 		left join subject_master sm on sm.sub_id=sas.subject_id 
-		left join (SELECT subject_id FROM exam_result_data WHERE student_id='$stud_id' GROUP BY subject_id) as e on e.subject_id=sas.subject_id 
+		#left join (SELECT subject_id FROM exam_result_data WHERE student_id='$stud_id' GROUP BY subject_id) as e on e.subject_id=sas.subject_id 
 		$where";
         $query = $DB1->query($sql);
 		//echo $DB1->last_query();exit;
@@ -246,13 +247,13 @@ class Subject_allocation_model extends CI_Model
     } 
 	function load_semester_subjects()
     {
-		$cond='and admission_cycle IS NULL';
+		/* $cond='and admission_cycle IS NULL';
 		if(isset($_POST['phd']) && $_POST['phd'] ==1){
 		$cond='';	
-		}
+		} */
         $DB1 = $this->load->database('umsdb', TRUE);    
         $acd_yr =explode('-', $_POST['academic_year']);
-		$sql="SELECT s.current_semester as semester FROM student_master s  where s.academic_year='".$acd_yr[0]."' and s.admission_stream='".$_POST['stream_id']."' and s.cancelled_admission ='N' and s.is_detained='N' $cond  group by s.current_semester";
+		$sql="SELECT s.current_semester as semester FROM student_master s  where s.academic_year='".$acd_yr[0]."' and s.admission_stream='".$_POST['stream_id']."' and s.cancelled_admission ='N' and s.is_detained='N' group by s.current_semester";
         
         $query = $DB1->query($sql);
 		//echo $DB1->last_query();

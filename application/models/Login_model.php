@@ -13,11 +13,11 @@ class Login_model extends CI_Model
 		$getCon = null;
 		//echo $user;
 		//echo $uttype;die(); 
-        if($uttype=='student' || $uttype=='parent')
+        if($uttype=='Student' || $uttype=='parent')
         {
 				   
 			
-			if($uttype=='student')
+			if($uttype=='Student')
 			{
 			$role_id=4;	
 			}
@@ -27,7 +27,7 @@ class Login_model extends CI_Model
 			}
 						   
 			
-			// echo "user".$user;
+			 //echo "user".$user;
 			// echo "role".$role;
 			$sql = ("SELECT * FROM onlineadmission_ums.user_master WHERE username=?  AND roles_id = ?");
 								   
@@ -108,7 +108,7 @@ class Login_model extends CI_Model
              $dat['logintime']=date('Y-m-d H:i:s');
              $dat['ip_address']=$_SERVER['REMOTE_ADDR'];
              $dat['user_agent']=$_SERVER['HTTP_USER_AGENT'];
-             $dat['is_password_reset'] = $conRes[0]['is_password_reset'];
+             //$dat['is_password_reset'] = $conRes[0]['is_password_reset'];
              if($conRes[0]['username']!='')
              {
                $dat['login_status']='Y';   
@@ -121,10 +121,11 @@ class Login_model extends CI_Model
 			 
 			 
              $this->db->insert('user_login_history',$dat);
+			 //print_r($this->db->error());
              return $conRes;
         }
         else{
-           //print_r($this->db->error());
+          // print_r($this->db->error());
            
             $dat['username']=$user;
             //$dat['role_id']=$conRes[0]['roles_id'];

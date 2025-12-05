@@ -9,19 +9,41 @@ class SyllabusController extends CI_Controller {
         $this->load->library('upload');
         $this->load->library('excel');
     }
+	
     public function index($subject_id = null,$campus_id = null) {
+		//echo "<pre>";
 		$this->load->view('header',$this->data);
 		if (!$subject_id) {
 			show_error("Subject ID is required", 400);
 		}
-		$data['subject_id'] = $subject_id;
-		$data['campus_id'] = $campus_id;
-		$data['subject'] = $this->Syllabus_model->getSubjectById($subject_id,$campus_id); // fetch subject name/code
+		$this->data['subject_id'] = $subject_id;
+		$this->data['campus_id'] = $campus_id;
+		$this->data['subject'] = $this->Syllabus_model->getSubjectById($subject_id,$campus_id); // fetch subject name/code
 		//print_r($data['subject']);exit;
-        $data['topics'] = $this->Syllabus_model->getTopicsWithSubtopics($subject_id,$campus_id);
-        $this->load->view('Syllabus/index', $data);
+        $this->data['topics'] = $this->Syllabus_model->getTopicsWithSubtopics($subject_id,$campus_id);
+		//print_r($data['topics']);die;
+        $this->load->view('Syllabus/index', $this->data);
 		$this->load->view('footer');
     }
+
+
+
+	 public function subjectEbook($subject_id = null,$campus_id = null) {
+		//echo "<pre>";
+		$this->load->view('header',$this->data);
+		if (!$subject_id) {
+			show_error("Subject ID is required", 400);
+		}
+		$this->data['subject_id'] = $subject_id;
+		$this->data['campus_id'] = $campus_id;
+		$this->data['subject'] = $this->Syllabus_model->getSubjectById($subject_id,$campus_id); // fetch subject name/code
+		 
+        $this->data['topics'] = $this->Syllabus_model->getTopicsWithSubtopics($subject_id,$campus_id);
+		 
+        $this->load->view('Syllabus/syllabus_ebook', $this->data);
+		$this->load->view('footer');
+     }
+
 
     public function add_topic() {
         if ($_POST) {
@@ -240,6 +262,13 @@ public function download_syllabus_sample() {
     $objWriter->save('php://output');
     exit;
 }
+
+ 
+
+
+
+
+
 	
 	
 }

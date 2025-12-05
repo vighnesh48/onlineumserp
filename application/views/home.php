@@ -1,6 +1,22 @@
 
 
+<style>
+@keyframes shake {
+  0% { transform: translateX(0px); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0px); }
+}
 
+.shake-alert {
+    animation: shake 0.6s ease-in-out 1;
+}
+
+.blink-border {
+    border: 2px solid #ffbf00 !important;
+}
+</style>
 <div class="layout">
 
 <!-- SIDEBAR -->
@@ -126,7 +142,7 @@
       <div class="col-md-3">
 
         <!-- RANK BOX -->
-        <div class="rank-box">
+        <!--div class="rank-box">
           <div class="clearfix" style="margin-bottom:10px;">
             <strong style="float:left;">My ranking</strong>
             <button class="btn btn-sm" style="background:#1c8eb3; color:#fff; float:right; border-radius:25px;">View All</button>
@@ -141,7 +157,48 @@
             <img src="https://randomuser.me/api/portraits/women/65.jpg">
             <div>Bella<br><small>1st</small></div>
           </div>
+        </div-->
+	<div class="rank-box" style="background:#fff; padding:20px; border-radius:18px; box-shadow:0 3px 10px rgba(0,0,0,0.15);" id="notifBox">
+
+    <div class="clearfix" style="margin-bottom:10px;">
+        <strong style="float:left; font-size:18px;color:#004aad;">📢 Notifications</strong>
+
+        <button id="toggleNotif" class="btn btn-sm" 
+        style="background:#1c8eb3; color:#fff; float:right; border-radius:25px;">
+        View
+        </button>
+    </div>
+
+    <!-- Content initially hidden -->
+    <div id="notifContent" style="display:none;">
+        
+        <?php if(!empty($notifications)) { ?>
+            <?php foreach($notifications as $row){ ?>
+                <div class="rank-user" style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #eee;">
+                    <img src="<?= base_url('assets/images/bell-icon.png') ?>" style="width:32px;height:32px;">
+                    <div style="flex-grow:1;">
+                        <strong><?= $row['subject']; ?></strong><br>
+                        <small><?= $row['description']; ?></small>
+                        <?php if(!empty($row['notification_url'])) { ?>
+                            <br><a href="<?= $row['notification_url'] ?>" target="_blank" style="color:#0078d7;font-weight:600;">Open Link</a>
+                        <?php } ?>
+                    </div>
+                </div>
+            <?php } ?>
+        <?php } else { ?>
+
+        <div style="padding:15px; text-align:center; color:#777; font-size:15px;">
+            <i class="glyphicon glyphicon-info-sign" style="color:#0078d7;"></i>
+            No notifications available currently
         </div>
+
+        <?php } ?>
+    </div>
+</div>
+
+
+
+
 
         <!-- BAR CHART -->
         <div class="chart-box">
@@ -179,3 +236,33 @@
 </div>
 
 </div>
+<script>
+$(document).ready(function() {
+
+    //  By default = closed
+    $("#notifContent").hide();
+    $("#toggleNotif").text("View");
+
+    // If notifications exist -> shake to attract attention
+    <?php if(!empty($notifications)) { ?>
+        $("#notifBox").addClass("shake-alert blink-border");
+        setTimeout(function(){
+            $("#notifBox").removeClass("shake-alert");
+        }, 800);
+    <?php } ?>
+
+    // Toggle Show / Hide
+    $("#toggleNotif").click(function(){
+        let content = $("#notifContent");
+
+        if(content.is(":visible")){
+            content.slideUp();
+            $(this).text("View");
+        } else {
+            content.slideDown();
+            $(this).text("Close");
+        }
+    });
+
+});
+</script>

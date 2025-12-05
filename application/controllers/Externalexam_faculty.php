@@ -58,7 +58,7 @@ class Externalexam_faculty extends CI_Controller
     public function add()
     {
         $this->load->view('header',$this->data);  
-		 $this->data['btype']=base64_decode($this->uri->segment(3));
+		$this->data['btype']=base64_decode($this->uri->segment(3));
         $this->data['bank_details']=$this->Guide_allocation_phd_model->fetch_bank_det();		
         $this->load->view($this->view_dir.'add',$this->data);
         $this->load->view('footer');

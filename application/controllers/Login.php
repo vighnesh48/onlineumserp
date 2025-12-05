@@ -16,16 +16,18 @@ class Login extends CI_Controller
     {
 		//$this->output->enable_profiler(TRUE);
 		 $this->load->helper("url");		
-	     $data['utype'] = $this->uri->segment(3);
-		
+	     $data['utype'] = $this->input->post('uttype');
+
 		
 		
         $data['msg'] = '';	
-        if($this->security->xss_clean($this->input->post('role_id')==4)){
+        if($this->security->xss_clean($this->input->post('uttype')=='Student')){
              $data['login_user'] = 'Student';
+			 $_POST['role_id']=4;
         }
-       else if($this->security->xss_clean($this->input->post('role_id')==9)){
+       else if($this->security->xss_clean($this->input->post('uttype')=='Parent')){
              $data['login_user'] = 'Parent';
+			 $_POST['role_id']=9;
         }
         else
         {
@@ -34,8 +36,8 @@ class Login extends CI_Controller
 
         if($this->input->post('submit'))
         {
-			//echo $var;
-			//exit(0);
+			//print_r($_POST);
+		//exit(0);
 			 //print_r($this->input->post());die;
              $recaptchaResponse = $this->input->post('g-recaptcha-response');						
 			if (!$recaptchaResponse) {
@@ -65,6 +67,8 @@ class Login extends CI_Controller
 				//echo 1111;print_r($adminRec);
 				//exit;
 				}
+				//print_r($adminRec);
+				//exit;
 				$checkro=$this->login_model->getRoUser($adminRec['username']);
 			//print_r($checkro);exit;
 				 if(!empty($checkro))

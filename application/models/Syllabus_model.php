@@ -16,7 +16,7 @@ class Syllabus_model extends CI_Model {
 		return $topics;
     }
 	public function getTopicsWithSubtopics($subject_id, $campus_id) {
-    $DB3 = $this->load->database('obe', TRUE);
+    $DB3 = $this->load->database('umsdb', TRUE);
 
     // Get all topics for this subject
     $DB3->where('subject_id', $subject_id);

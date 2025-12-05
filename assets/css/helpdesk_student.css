@@ -1,0 +1,145 @@
+/* GLOBAL */
+body {
+    background:#eef2f7 !important;
+    font-family:"Segoe UI",Roboto,sans-serif !important;
+}
+
+/* HEADER */
+.page-header {
+    background:linear-gradient(135deg,#004aad,#2196f3) !important;
+    color:#fff !important;
+    border-radius:10px !important;
+    padding:16px 22px !important;
+    font-size:22px !important;
+    font-weight:600 !important;
+    box-shadow:0 5px 15px rgba(0,0,0,0.28) !important;
+}
+.page-header .glyphicon {
+    animation:jumpIcon 1.4s infinite ease-in-out !important;
+}
+
+/* PANEL */
+.panel-custom {
+    border:none !important;
+    border-radius:12px !important;
+    box-shadow:0 5px 18px rgba(0,0,0,0.18) !important;
+    animation:fadeIn .4s ease !important;
+}
+.panel-custom > .panel-heading {
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    padding:16px !important;
+    font-size:18px !important;
+    font-weight:600 !important;
+    color:#31708f !important;
+    border-radius:12px 12px 0 0 !important;
+    text-transform:uppercase !important;
+}
+.panel-custom .glyphicon {
+    animation:jumpSmall 1.2s infinite !important;
+}
+
+/* FORM FIELDS */
+.form-control {
+    height:38px !important;
+    border-radius:6px !important;
+    box-shadow:none !important;
+    transition:.3s !important;
+}
+.form-control:focus {
+    border-color:#2196f3 !important;
+    box-shadow:0 0 8px rgba(33,150,243,.6) !important;
+}
+textarea.form-control {
+    height:auto !important;
+}
+
+/* HELP BLOCK */
+.help-block {
+    font-size:12px !important;
+    color:#555 !important;
+}
+
+/* CHARACTER COUNTER */
+#desc_count {
+    font-size:12px !important;
+    font-weight:bold !important;
+    color:#004aad !important;
+}
+
+/* CHECKBOX TEXT */
+.checkbox-inline {
+    font-weight:bold !important;
+}
+
+/* BUTTON */
+.btn-success {
+    background:#28a745 !important;
+    border:none !important;
+    font-size:16px !important;
+    padding:10px 20px !important;
+    transition:.3s ease !important;
+    animation:btnPulse 2s infinite alternate !important;
+}
+.btn-success:hover {
+    background:#1f7c34 !important;
+    transform:translateY(-3px) !important;
+    box-shadow:0 5px 12px rgba(0,0,0,0.3) !important;
+}
+.btn-success .glyphicon {
+    animation:jumpIcon 1.4s infinite ease-in-out !important;
+}
+
+/* HAS ERROR */
+.has-error .form-control {
+    border-color:#d9534f !important;
+    box-shadow:0 0 8px rgba(217,83,79,.6) !important;
+    animation:shake .4s linear !important;
+}
+
+/* ALERT */
+.alert {
+    border-radius:6px !important;
+    animation:fadeSlide .5s ease !important;
+}
+
+/* TABLE, VIEW, CHAT when added */
+.label {
+    font-weight:bold !important;
+    animation:softPulse 2s infinite alternate !important;
+}
+
+/* ANIMATIONS */
+@keyframes jumpIcon {
+    0% {transform:translateY(0) rotate(0deg);}
+    50% {transform:translateY(-6px) rotate(3deg);}
+    100% {transform:translateY(0) rotate(-3deg);}
+}
+@keyframes jumpSmall {
+    0% {transform:translateY(0);}
+    50% {transform:translateY(-4px);}
+    100% {transform:translateY(0);}
+}
+@keyframes fadeIn {
+    from {opacity:0; transform:translateY(10px);}
+    to {opacity:1; transform:translateY(0);}
+}
+@keyframes fadeSlide {
+    from {opacity:0; transform:translateY(-8px);}
+    to {opacity:1; transform:translateY(0);}
+}
+@keyframes softPulse {
+    0% {opacity:1;}
+    100% {opacity:.6;}
+}
+@keyframes btnPulse {
+    0% {box-shadow:0 0 6px rgba(33,150,243,.4);}
+    100% {box-shadow:0 0 14px rgba(33,150,243,1);}
+}
+@keyframes shake {
+    0%,100% {transform:translateX(0);}
+    20% {transform:translateX(-6px);}
+    40% {transform:translateX(6px);}
+    60% {transform:translateX(-4px);}
+    80% {transform:translateX(4px);}
+}

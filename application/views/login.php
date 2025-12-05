@@ -67,7 +67,7 @@ define('SECRET_KEY',SECRET_KEY);
          </a>
        
          <form action="<?=site_url('login')?>" id="signin-form_id" method="post">
-            <span>Sign In to your account :<strong><span class="redtext"> <?php if($utype!=''){echo $utype; }else{echo "Staff";} //echo $login_user; ?>  Login </span></strong></span>
+            <span>Sign In to your account :<strong><span class="redtext"> <input type="radio" name="uttype" value="Staff" required> Faculty  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="uttype" value="Student" required> Student </span></strong></span>
             <?php if(@$this->session->flashdata('msg')){?>
             <div class="has-error redtext"><span class="form-control-feedback redtext"><?=@$this->session->flashdata('msg')?></span></div>
             <? }?>
@@ -83,7 +83,7 @@ define('SECRET_KEY',SECRET_KEY);
             <div class="mb-3 text-start">
               <!-- <label class="form-label">Password</label>-->
                <input type="password" name="signin_password" id="password_id" class="form-control input-lg" placeholder="Password" required>
-               <input type="hidden" name="uttype" value="<?php if($utype){ $utp = $utype;}else{$utp='';} echo $utp;?>">
+               <!--input type="hidden" name="uttype" value="<?php if($utype){ $utp = $utype;}else{$utp='';} echo $utp;?>"-->
                <input type="hidden" name="role_id" value="<?php if($_REQUEST['role']!=''){ $val = $_REQUEST['role'];}elseif($roleid !=''){$val =$roleid;}else{$val='';} echo $val;?>">
             </div>
   
@@ -109,7 +109,7 @@ define('SECRET_KEY',SECRET_KEY);
                       	    $ank ="https://erp.sandipuniversity.com/forgot_password";
                   }
                   ?>
-               <a href="<?=$ank?>" class="forgot-password redtext" id="forgot-password-link " >Forgot your password?</a>
+               <a href="#" class="forgot-password redtext" id="forgot-password-link " >Forgot your password?</a>
             </div>
          </form>
       </div>

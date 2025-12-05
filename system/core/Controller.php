@@ -197,7 +197,7 @@ else
             if((!isset($this->session->userdata['role_id'])))//&&($this->uri->segment(2)!="payment_handler_success")
    {
 
-	 echo "Your Session Has expired Please <a href='https://erp.sandipuniversity.com/login'>login again</a>";
+	 echo "Your Session Has expired Please <a href='https://onlineerp.sandipuniversity.com/'>login again</a>";
     exit(0);
 
   }

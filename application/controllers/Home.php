@@ -61,7 +61,8 @@ class Home extends CI_Controller
 				$data1['examid']=$this->data['latest_exam'][0]['exam_id'];
 				//$data['fees']= $this->Examination_model->fetch_fees($data1);
 				//$this->data['online_fees']= $this->Examination_model->fetch_onlinefees($data1);
-				$this->data['student_details'] = $this->Dashboard_model->get_student_details($_SESSION['name']);
+				$this->data['student_details']=$stud_data= $this->Dashboard_model->get_student_details($_SESSION['name']);
+				$this->data['notifications'] = $this->Dashboard_model->get_student_notifications($stud_data[0]['admission_stream'], $stud_data[0]['current_semester']);
 				$this->data['student_academic_calendar'] = $this->Dashboard_model->get_student_academic_calendar($this->data['student_details'][0]['academic_year'],$this->data['student_details'][0]['course_id'],$this->data['student_details'][0]['admission_school'],$this->data['student_details'][0]['admission_stream'],$this->data['student_details'][0]['current_year']);
 				$this->data['student_academic_event'] = $this->Dashboard_model->get_student_academic_event($this->data['student_details'][0]['academic_year'],$this->data['student_details'][0]['course_id'],$this->data['student_details'][0]['admission_school'],$this->data['student_details'][0]['admission_stream'],$this->data['student_details'][0]['current_year']);
 				

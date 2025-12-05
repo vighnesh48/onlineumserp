@@ -1,0 +1,131 @@
+/* SHARED STYLING */
+.chat-box{
+    max-height:420px !important;
+    overflow-y:auto !important;
+    padding:15px !important;
+    background:#eef2f7 !important;
+    border-radius:10px !important;
+}
+
+/* COMMON CHAT BUBBLE */
+.chat-msg{
+    width:100% !important;
+    margin-bottom:15px !important;
+    animation:fadeSlide 0.4s ease !important;
+}
+.chat-msg .bubble{
+    display:inline-block !important;
+    padding:12px 18px !important;
+    border-radius:14px !important;
+    max-width:70% !important;
+    font-size:14px !important;
+    line-height:18px !important;
+    box-shadow:0 3px 10px rgba(0,0,0,0.2) !important;
+}
+
+.chat-left{ text-align:left !important; }
+.chat-right{ text-align:right !important; }
+
+/* MODE A: WhatsApp style */
+
+/* WhatsApp Background */
+.whatsapp.chat-box {
+    background-image: url('https://raw.githubusercontent.com/iamkingsley/wallpapers/main/whatsapp/wa-bg-light.png') !important;
+    background-size: cover !important;
+    background-repeat: repeat !important;
+    background-position: center !important;
+    position:relative !important;
+}
+.whatsapp.chat-box::after {
+    content:'' !important;
+    position:absolute !important;
+    top:0 !important;
+    left:0 !important;
+    width:100% !important;
+    height:100% !important;
+    background:rgba(0,157,65,0.08) !important;
+    pointer-events:none !important;
+}
+
+
+.whatsapp.chat-left .bubble{
+    background:#ffffff !important;
+    border:1px solid #ddd !important;
+}
+.whatsapp.chat-right .bubble{
+    background:#d4f8c4 !important;
+    border:1px solid #5cb85c !important;
+}
+
+
+/* MODE B: Messenger floating window */
+.messenger .bubble{
+    border-radius:26px !important;
+    padding:14px 20px !important;
+    font-size:15px !important;
+    box-shadow:0 5px 14px rgba(0,0,0,0.25) !important;
+}
+.messenger .text-muted{
+    color:rgb(17, 17, 17) !important;
+}
+.messenger.chat-left .bubble{
+    background:#fff !important;
+}
+.messenger.chat-right .bubble{
+    background:#0084ff !important;
+    color:white !important;
+}
+.messenger.chat-box {
+    background: linear-gradient(135deg, #4e54c8, #8f94fb) !important;
+    animation: bgGradient 6s infinite alternate !important;
+}
+
+@keyframes bgGradient {
+    0% { background: linear-gradient(135deg, #4e54c8, #8f94fb); }
+    100% { background: linear-gradient(135deg, #4776e6, #8e54e9); }
+}
+
+/* MODE C: Zoom – Video call speech bubbles */
+.zoom .bubble{
+    background:#222 !important;
+    color:#fff !important;
+    border-radius:8px !important;
+    max-width:80% !important;
+    border:2px solid #00aaff !important;
+}
+.zoom.chat-left .bubble::before,
+.zoom.chat-right .bubble::before{
+    content:'🎤' !important;
+    margin-right:4px !important;
+}
+.zoom.chat-box {
+    background: rgba(20, 20, 20, 0.88) !important;
+    backdrop-filter: blur(6px) !important;
+    border: 2px solid #00aaff !important;
+    border-radius: 14px !important;
+}
+
+/* File link */
+.attach-link{
+    background:#004aad !important;
+    color:#fff !important;
+    padding:3px 6px !important;
+    border-radius:4px !important;
+    display:inline-block !important;
+    margin-top:6px !important;
+}
+
+/* Animations */
+@keyframes fadeSlide {
+    from{opacity:0;transform:translateY(10px);}
+    to{opacity:1;transform:translateY(0);}
+}
+.chat-msg {
+    animation: fadeSlideUp 0.35s ease-out !important;
+}
+
+@keyframes fadeSlideUp {
+    from { opacity:0; transform:translateY(15px); }
+    to   { opacity:1; transform:translateY(0); }
+}
+

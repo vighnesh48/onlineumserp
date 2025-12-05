@@ -196,11 +196,11 @@ if(!empty($emp[0]['student_photo_path'])){
        // $bucket_key = 'uploads/student_photo/'.$emp[0]['enrollment_no'].'.jpg';
         $imageData = $this->awssdk->getsignedurl($bucket_key);
     ?>
-    <img src="<?=$imageData?>"  width="100%" height="100%" class="img-circle">
+    <img src="<?=base_url()?>assets/images/user-img.jpg"  width="100%" height="100%" class="img-circle">
    </div>
     </div>
    <div class="col-md-9">
-   <h3 class=""><b>Name: <?=$emp[0]['last_name']?> <?=$emp[0]['first_name']?> <?=$emp[0]['middle_name']?></b> <small>(<?=$emp[0]['marathi_name']?>)</small></h3>
+   <h3 class=""><b>Name: <?=$emp[0]['last_name']?> <?=$emp[0]['first_name']?> <?=$emp[0]['middle_name']?></b> <small></small></h3>
    <hr/>
    <div class="row">
     <div class="col-md-8 ">
@@ -264,15 +264,15 @@ if(!empty($emp[0]['student_photo_path'])){
               <tr>
                <td>Current Semester</td>
                <td><b><?=$emp[0]['current_semester']?></b></td>
-			    <td>ABC Id</td>
-               <td><b><?php if(!empty($emp[0]['abc_no'])){ echo $emp[0]['abc_no'];}else{ echo '-';}?></b></td>
+			    <td>Admission Cycle</td>
+               <td><b><?php if(!empty($emp[0]['admission_cycle'])){ echo $emp[0]['admission_cycle'];}else{ echo '-';}?></b></td>
              </tr>
-			 <tr>
+			 <!--tr>
                <td>Admission Cycle</td>
                <td><b><?php if(!empty($emp[0]['admission_cycle'])){ echo $emp[0]['admission_cycle'];}else{ echo $emp[0]['admission_session'];}?></b></td>
 			   <td>Package</td>
                 <td><b><?php if($emp[0]['belongs_to'] == 'Package' ){ echo 'Yes'; echo ' - '.$emp[0]['package_name'];}else{ echo 'No';}?></b></td>
-             </tr>
+             </tr-->
 			 <tr>
               
              </tr>
@@ -791,9 +791,9 @@ if(!empty($emp[0]['student_photo_path'])){
     					    <th scope="col">Chq Cancellation Charges</th>
     					      <th scope="col">Total Outstanding</th>
 							  
-							  <th scope="col">Package</th>
+							  <!--th scope="col">Package</th-->
 							  <th scope="col">Admission Status</th>
-							  <th scope="col">Hostel</th>
+							  <!--th scope="col">Hostel</th-->
 							  <th scope="col">Remark</th>
     					<!--  <td><strong>Academic Fees</strong></td>
     					  <td><strong>Exepmted Fees</strong></td>
@@ -884,9 +884,9 @@ if($this->session->userdata("uid")==2){
     							<td><?php echo $can_amt + $pend; //$canc_charges[0]['canc_amount'] ?></td>
 								<?php if($role_id==5 || $role_id==6){?>
     						
-    						<td><?= isset($admission_det['Package_name']) ? $admission_det['Package_name'] : '' ?></td>
+    						<!--td><?= isset($admission_det['Package_name']) ? $admission_det['Package_name'] : '' ?></td-->
     						<td><?php if(isset($admission_det['admission_status']) && $admission_det['admission_status']==1){ echo 'Regular';}elseif($admission_det['admission_status']==2){echo 'Cancelled';}else{echo 'Drop';}?></td>
-							<td><?php if(isset($admission_det['prn'])){?> <a href="<?=base_url()?>Hostel/student_facility_details/<?=$admission_det['enrollment_no']?>/<?=$admission_det['f_alloc_id']?>/SU/<?=$admission_det['academic_year']?>" target="_blank">View</a><?php }else{ echo '-';}?></td>
+							<!--td><?php if(isset($admission_det['prn'])){?> <a href="<?=base_url()?>Hostel/student_facility_details/<?=$admission_det['enrollment_no']?>/<?=$admission_det['f_alloc_id']?>/SU/<?=$admission_det['academic_year']?>" target="_blank">View</a><?php }else{ echo '-';}?></td-->
 							<td><?= isset($admission_det['concession_remark']) ? $admission_det['concession_remark'] : '' ?></td>
 						<?php }?>
     					</tr>

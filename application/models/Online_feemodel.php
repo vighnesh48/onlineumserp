@@ -458,9 +458,9 @@ function check_fee_records($stdid,$type)
 					
 					if(!empty($result['opening_balance'])){
 					$paidoping=$result['opening_balance'] - $result['famount']; 
-					$new=($result['applicable_fee'])*58/100 + $paidoping;
+					$new=($result['applicable_fee'])*50/100 + $paidoping;
 					}else{
-					$new=(($result['applicable_fee']+$result['canc_amount']+$result['opening_balance'])*58)/100;
+					$new=(($result['applicable_fee']+$result['canc_amount']+$result['opening_balance'])*50)/100;
 					$new=$new-$result['famount'];	
 					}
 					

@@ -48,14 +48,7 @@ class Admin extends CI_Controller
 		}else{
 			redirect('home');
 		}*/
-		$allowed_functions = ['getEmpListDepartmentSchoolforLeave', 'getdepartmentByschool','attendance_all','view_attendance','view_attendance_excel','getEmpListDepartmentSchoolforod','getStatewiseCity','getEmpListbyDepartmentSchool_attendance','grade_card_nad_report','employee_list','admission_report_show','grade_card_nad_report','student_gradesheet_excel'];
-
-        if (($this->session->userdata("role_id") != 1 && $this->session->userdata("role_id")!=48 
-		&& $this->session->userdata("role_id")!=6 && $this->session->userdata("role_id")!=44 && $this->session->userdata("role_id")!=15 
-		&& $this->session->userdata("role_id")!=65)
-		&& !in_array($this->router->fetch_method(), $allowed_functions)) {
-            redirect('home');
-        }
+		
             
       //  $this->data['method_privileges']=$this->retrieve_privileges($this->uri->segment(2));
     }
@@ -4930,7 +4923,7 @@ public function update_visiting_lecture_consideration_status(){
     exit;
 }
 
-///////////////   
+
 	
 }
 ?>

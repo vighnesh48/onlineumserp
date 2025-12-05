@@ -4542,6 +4542,7 @@ public function fetch_visiting_faculty_lecture_att($ddate='')
 	$query=$DB1->query($sql);
 	 return $query->result_array();
   }
-	//////////////////////////////
+  
+
   
 }

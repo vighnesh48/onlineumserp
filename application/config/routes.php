@@ -61,4 +61,10 @@ $route['live_session/create_demo'] = 'live_session/create_demo';
 $route['live_session/admin_list'] = 'live_session/admin_list';
 $route['live_session/student_list'] = 'live_session/student_list';
 $route['live_session/join/(:num)'] = 'live_session/join/$1';
+$route['student/calendar'] = 'live_session/student_calendar';
 
+$route['live_session/join_ajax/(:num)'] = 'live_session/join_ajax/$1';
+$route['live_session/attendance_ping'] = 'live_session/attendance_ping';
+$route['live_session/attendance_leave'] = 'live_session/attendance_leave';
+$route['student/calendar/events'] = 'live_session/student_calendar_events';
+$route['live_session/attendance_summary/(:num)'] = 'live_session/attendance_summary/$1';

@@ -22,11 +22,11 @@
     <ul class="breadcrumb breadcrumb-page">
         <div class="breadcrumb-label text-light-gray">You are here: </div>
         <li><a href="#">Masters</a></li>
-        <li class="active"><a href="#">Subject Allocation </a></li>
+        <li class="active"><a href="#">Course Allocation </a></li>
     </ul>
     <div class="page-header">			
         <div class="row" style="margin-bottom:15px">
-            <h1 class="col-xs-12 col-sm-4 text-center text-left-sm"><i class="fa fa-dashboard page-header-icon text-danger"></i>&nbsp;&nbsp;Subject Allocation</h1>
+            <h1 class="col-xs-12 col-sm-4 text-center text-left-sm"><i class="fa fa-dashboard page-header-icon text-danger"></i>&nbsp;&nbsp;Course Allocation</h1>
             <div class="col-xs-12 col-sm-8">
                 <div class="row">                    
                     <hr class="visible-xs no-grid-gutter-h">
@@ -39,7 +39,7 @@
 			<div class="col-sm-12">
 				<div class="panel">
                     <div class="panel-heading">
-                            <span class="panel-title">Subject List</span>
+                            <span class="panel-title">Course List</span>
                     </div>
                     <div class="panel-body">
                         <div class="table-info">  
@@ -108,13 +108,13 @@
 									<th>Type</th>
 									<th>Semester</th>
 									<th>Credits</th>
-									<th>CIA Marks</th>
 									<th>Appeared in Exam</th>
+									<th>Videos/eBooks</th>
 									<?php 
 									//if($emp[0]['current_semester']==$sem['semester']){
 										if($this->session->userdata('role_id')==2 || $this->session->userdata('role_id')==10 || $this->session->userdata('role_id')==20 || $this->session->userdata('role_id')==15){
 									?>
-									<th>Remove</th>
+									<!--<th>Remove</th>-->
 										<?php }//}?>
 									
 								</tr>
@@ -124,6 +124,8 @@
 								$i=1;
 									if(!empty($sublist)){
 										foreach($sublist as $sub){
+										/* 	echo "<pre>";
+											print_r($sub); die; */
 											//echo $sub['subject_id'];
 											$subcia =$this->Subject_allocation_model->getsubject_cia_marks($emp[0]['stud_id'],$sub['subject_id']);
 											if($sub['sub_id']==$sub['res_subject_id']){
@@ -141,29 +143,23 @@
 									<td><?=$sub['subject_type']?></td>
 									<td><?=$sub['semester']?></td>
 									<td><?=$sub['credits']?></td>
-									<td><?php 
-									if(!empty($subcia[0]['cia_marks'])){
-										echo $subcia[0]['cia_marks'];
-									}else{
-										echo '-';
-										} ?>
-										</td>
+									
 									<td><?php if($sub['subject_id']==$sub['res_subject_id']){
 												echo 'Yes';
 											}else{
 												echo 'No';
 											}?></td>
-									<?php 
-									//if($emp[0]['current_semesterorg']==$sem['semester']){ && ($emp[0]['current_semester']==$sem['semester'])
-										if(($this->session->userdata('role_id')==10 || $this->session->userdata('role_id')==20 || $this->session->userdata('role_id')==15) ){
-											
-									?>
+									
+									
 									<td>
-									<?php if($sub['subject_id']==$sub['res_subject_id']){
-												echo 'Not allowed ';
-											}else{ ?>
-											<a href="<?=base_url()?>Subject_allocation/removeSubject/<?=$sub['sub_applied_id']?>/<?=$sub['stud_id']?>" onclick="return confirm('Are you sure you want to Remove this Subject?');"><i class="fa fa-trash" aria-hidden="true"></i></a>
-									<?php }}?>
+										<a href="<?php echo base_url('SyllabusController/index/'.$sub['subject_id'].'/1'); ?>">
+										<!--<i class="fa fa-eye" style="font-size:24px"></i>-->
+										<img src="<?php echo base_url('assets/video-player.gif'); ?>" height="40px" width="40px">
+										</a>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a href="<?php echo base_url('SyllabusController/subjectEbook/'.$sub['subject_id'].'/1'); ?>">
+											<img src="<?php echo base_url('assets/ebook.gif'); ?>" height="40px" width="40px">
+										</a>
 									</td>
 								</tr>
 								<?php 

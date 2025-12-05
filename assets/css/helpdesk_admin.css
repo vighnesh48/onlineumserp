@@ -1,0 +1,150 @@
+/* GLOBAL ROOT */
+body {
+    background:#eef2f7 !important;
+    font-family:"Segoe UI",Roboto,sans-serif !important;
+}
+
+/* PAGE HEADER */
+.page-header{
+    background:linear-gradient(135deg,#004aad,#2196f3) !important;
+    color:#fff !important;
+    padding:16px 22px !important;
+    border-radius:10px !important;
+    box-shadow:0 5px 12px rgba(0,0,0,0.25) !important;
+    font-size:22px !important;
+    font-weight:bold !important;
+}
+.page-header .glyphicon{
+    animation:jumpIcon 1.4s infinite ease-in-out !important;
+}
+
+/* DASHBOARD STAT CARDS */
+.dashboard-cards .card-info{
+    background:#fff !important;
+    border-radius:12px !important;
+    padding:18px !important;
+    margin-bottom:20px !important;
+    box-shadow:0 3px 10px rgba(0,0,0,0.2) !important;
+    transition:transform .25s ease, box-shadow .25s ease !important;
+}
+
+.dashboard-cards .card-info:hover{
+    transform:scale(1.05) !important;
+    box-shadow:0 6px 20px rgba(0,0,0,0.3) !important;
+}
+
+.dashboard-cards h4{
+    font-size:28px !important;
+    margin:0 !important;
+}
+.dashboard-cards p{
+    font-size:26px !important;
+    font-weight:bold !important;
+    margin-top:6px !important;
+}
+.dashboard-cards small{
+    font-size:12px !important;
+    letter-spacing:1px !important;
+    text-transform:uppercase !important;
+}
+
+/* COLORS FOR CARDS */
+.card-open{ border-left:6px solid #f0ac4ece !important; }
+.card-progress{ border-left:6px solid #5bc0debd !important; }
+.card-critical{ border-left:6px solid #d9544fa6 !important; }
+.card-resolved{ border-left:6px solid #5cb85cbe !important; }
+
+/* ANIMATED FILTER PANEL */
+.filter-panel{
+    border-radius:10px !important;
+    border:none !important;
+    overflow:hidden !important;
+    animation:fadeSlide 0.5s ease !important;
+}
+.filter-panel .panel-heading{
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    color:#31708f !important;
+    font-weight:bold !important;
+    font-size:15px !important;
+}
+.filter-panel .panel-heading .glyphicon{
+    animation:jumpSmall 1.2s infinite !important;
+}
+.filter-panel .panel-body{
+    background:white !important;
+    padding:14px !important;
+}
+
+/* TABLE STYLING */
+.table{
+    background:#fff !important;
+    border-radius:10px !important;
+    overflow:hidden !important;
+    box-shadow:0 2px 12px rgba(0,0,0,0.15) !important;
+}
+.table > thead > tr{
+    background:#004aad !important;
+    color:#fff !important;
+    text-transform:uppercase !important;
+    font-size:13px !important;
+}
+.table-hover > tbody > tr:hover{
+    background:#eaf3ff !important;
+    transform:scale(1.01) !important;
+    transition:.25s ease !important;
+    cursor:pointer !important;
+}
+
+/* STATUS & PRIORITY BADGE EFFECT */
+.label{
+    font-weight:bold !important;
+    animation:softPulse 2s infinite alternate !important;
+}
+
+/* SLA RED ALERT GLOW */
+.sla-warning {
+    color:#d9534f !important;
+    font-weight:bold !important;
+    animation:redGlow 1s infinite alternate !important;
+}
+
+/* BUTTON STYLING */
+.btn-primary{
+    background:#004aad !important;
+    border:none !important;
+    animation:btnGlow 2s infinite alternate !important;
+    font-weight:bold !important;
+}
+.btn-primary:hover{
+    transform:translateY(-2px) !important;
+    box-shadow:0 5px 12px rgba(0,0,0,0.25) !important;
+}
+
+/* ANIMATIONS */
+@keyframes jumpIcon{
+    0%{transform:translateY(0) rotate(0deg);}
+    50%{transform:translateY(-6px) rotate(3deg);}
+    100%{transform:translateY(0) rotate(-3deg);}
+}
+@keyframes jumpSmall{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-4px);}
+    100%{transform:translateY(0);}
+}
+@keyframes fadeSlide{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
+}
+@keyframes redGlow{
+    0% { text-shadow:0 0 6px red; }
+    100% { text-shadow:0 0 16px red; }
+}
+@keyframes btnGlow{
+    0%{box-shadow:0 0 6px rgba(0,123,255,.5);}
+    100%{box-shadow:0 0 18px rgba(0,123,255,1);}
+}
+@keyframes softPulse{
+    0%{opacity:1;}
+    100%{opacity:.7;}
+}

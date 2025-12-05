@@ -42,7 +42,32 @@ class Dashboard_model extends CI_Model
 		}
         return $arr1;
     }  
+	public function get_student_notifications($course_id, $semester)
+{
+    $today = date('Y-m-d');
+
+    $this->db->select("*");
+    $this->db->from("notification_master");
+    $this->db->where("status", 1);
+    $this->db->where("'$today' BETWEEN from_date AND to_date", NULL, FALSE);
+
+    // Show to all if no course & no semester mentioned
+    $this->db->group_start();
+        $this->db->where("(applicable_course='' OR applicable_course IS NULL)", NULL, FALSE);
+        $this->db->or_where("(semester='' OR semester IS NULL)", NULL, FALSE);
+
+        // OR match exact student course & semester
+        $this->db->or_group_start();
+            $this->db->where("applicable_course", $course_id);
+            $this->db->where("semester", $semester);
+        $this->db->group_end();
+    $this->db->group_end();
+
+    $this->db->order_by("id", "DESC");
 	
+	//echo $this->db->last_query();exit;
+    return $this->db->get()->result_array();
+}
 	function get_employee_details_byid($empid){
 		 $this->db->select('e.emp_id,e.fname,e.mname,e.lname,dg.designation_name,dt.department_name,c.college_name');
      $this->db->from('employee_master as e');
